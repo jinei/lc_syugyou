@@ -15,7 +15,8 @@ class CreateTimelinesTable extends Migration
     {
         Schema::create('timelines', function (Blueprint $table) {
             $table->id();
-            $table->text('body'); //追加
+            $table->text('date');
+            $table->text('userid');
             $table->timestamps();
         });
     }

@@ -1,0 +1,34 @@
+main {
+  width: 100vw;
+}
+.table {
+  overflow: scroll;
+}
+th,td {
+  min-width: 5vw;
+  text-align: center;
+  cursor: pointer;
+}
+td:hover {
+  background-color: #908e8e;
+  color:white;
+}
+.selectctrl {
+  text-align: center;
+  margin:3vh 0vw;
+}
+.form-control {
+  width: 20vw;
+  display: inline;
+}
+@media (max-width: 599px) {
+nav {
+  display:none;
+}
+th,td {
+  min-width: 13vw;
+}
+.form-control {
+  width: 30vw;
+}
+}
