@@ -17,7 +17,7 @@
   <nav class="navbar navbar-inverse">
     <div class="container-fluid">
       <div class="navbar-header">
-        <a class="navbar-brand" href="#">○○○○店勤務表</a>
+        <a class="navbar-brand" href="#">{{$date[1]}}</a>
       </div>
       <ul class="nav navbar-nav">
         <li class="active"><a href="#">勤務表</a></li>
@@ -43,9 +43,9 @@
       <label for="sel1">ユーザー:</label>
       <select class="form-control">
         <option>全て</option>
-        <option>長野</option>
-        <option>金谷</option>
-        <option>益田</option>
+        @foreach ($employee as $user)
+        <option>{{$user}}</option>
+        @endforeach
       </select>
     </div>
 
@@ -53,85 +53,43 @@
       <table class="table table-striped" border-collapse="collapse">
         <thead>
 
-          <!-- ********曜日********* -->
+  <!--------------------------------------------------->
+  <!--                   曜日 START                  -->
+  <!--------------------------------------------------->
           <tr class="active">
             <th>Hallstaff</th>
-            <th>月</th>
-            <th>火</th>
-            <th>水</th>
-            <th>木</th>
-            <th>金</th>
-            <th>土</th>
-            <th>日</th>
-            <th>月</th>
-            <th>火</th>
-            <th>水</th>
-            <th>木</th>
-            <th>金</th>
-            <th>土</th>
-            <th>日</th>
-            <th>月</th>
-            <th>火</th>
-            <th>水</th>
-            <th>木</th>
-            <th>金</th>
-            <th>土</th>
-            <th>日</th>
-            <th>月</th>
-            <th>火</th>
-            <th>水</th>
-            <th>木</th>
-            <th>金</th>
-            <th>土</th>
-            <th>日</th>
-            <th>月</th>
-            <th>火</th>
+            @foreach ($date as $day)
+            <th>{{$weekday[$day->dayOfWeek]}}</th>
+            @endforeach
             <th>Hallstaff</th>
           </tr>
-          <!-- ********曜日********* -->
+  <!--------------------------------------------------->
+  <!--                   曜日 END                    -->
+  <!--------------------------------------------------->
 
-          <!-- ********日付********* -->
+
+  <!--------------------------------------------------->
+  <!--                   日付 START                  -->
+  <!--------------------------------------------------->
           <tr>
-            <th>6月</th>
-            <th>1</th>
-            <th>2</th>
-            <th>3</th>
-            <th>4</th>
-            <th>5</th>
-            <th>6</th>
-            <th>7</th>
-            <th>8</th>
-            <th>9</th>
-            <th>10</th>
-            <th>11</th>
-            <th>12</th>
-            <th>13</th>
-            <th>14</th>
-            <th>15</th>
-            <th>16</th>
-            <th>17</th>
-            <th>18</th>
-            <th>19</th>
-            <th>20</th>
-            <th>21</th>
-            <th>22</th>
-            <th>23</th>
-            <th>24</th>
-            <th>25</th>
-            <th>26</th>
-            <th>27</th>
-            <th>28</th>
-            <th>29</th>
-            <th>30</th>
-            <th>6月</th>
+            <th>{{$date[0]->month}}月</th>
+            @foreach ($date as $day)
+            <th>{{$day->day}}</th>
+            @endforeach
+            <th>{{$date[0]->month}}月</th>
           </tr>
-          <!-- ********日付********* -->
-        </thead>
+      </thead>
+  <!--------------------------------------------------->
+  <!--                   日付 END                    -->
+  <!--------------------------------------------------->  
 
+  <!--------------------------------------------------->
+  <!--              各従業員の勤務 START             -->
+  <!--------------------------------------------------->
         <tbody>
-
+          @foreach ($employee as $user)
           <tr>
-            <td>長野</td>
+            <td>{{$user}}</td>
             <td data-toggle="modal" data-target="#myModal">17:00<br>18:00</td>
             <td data-toggle="modal" data-target="#myModal">17:00<br>18:00</td>
             <td data-toggle="modal" data-target="#myModal">17:00<br>18:00</td>
@@ -162,111 +120,49 @@
             <td data-toggle="modal" data-target="#myModal">17:00<br>18:00</td>
             <td data-toggle="modal" data-target="#myModal">17:00<br>18:00</td>
             <td data-toggle="modal" data-target="#myModal">17:00<br>18:00</td>
-            <td>長野</td>
+            <td>{{$user}}</td>
           </tr>
-
-          <td>金谷</td>
-          <td data-toggle="modal" data-target="#myModal">17:00<br>18:00</td>
-          <td data-toggle="modal" data-target="#myModal">-</td>
-          <td data-toggle="modal" data-target="#myModal">-</td>
-          <td data-toggle="modal" data-target="#myModal">17:00<br>18:00</td>
-          <td data-toggle="modal" data-target="#myModal">-</td>
-          <td data-toggle="modal" data-target="#myModal">17:00<br>18:00</td>
-          <td data-toggle="modal" data-target="#myModal">17:00<br>18:00</td>
-          <td data-toggle="modal" data-target="#myModal">17:00<br>18:00</td>
-          <td data-toggle="modal" data-target="#myModal">17:00<br>18:00</td>
-          <td data-toggle="modal" data-target="#myModal">-</td>
-          <td data-toggle="modal" data-target="#myModal">17:00<br>18:00</td>
-          <td data-toggle="modal" data-target="#myModal">-</td>
-          <td data-toggle="modal" data-target="#myModal">17:00<br>18:00</td>
-          <td data-toggle="modal" data-target="#myModal">17:00<br>18:00</td>
-          <td data-toggle="modal" data-target="#myModal">17:00<br>18:00</td>
-          <td data-toggle="modal" data-target="#myModal">-</td>
-          <td data-toggle="modal" data-target="#myModal">17:00<br>18:00</td>
-          <td data-toggle="modal" data-target="#myModal">17:00<br>18:00</td>
-          <td data-toggle="modal" data-target="#myModal">17:00<br>18:00</td>
-          <td data-toggle="modal" data-target="#myModal">17:00<br>18:00</td>
-          <td data-toggle="modal" data-target="#myModal">-</td>
-          <td data-toggle="modal" data-target="#myModal">17:00<br>18:00</td>
-          <td data-toggle="modal" data-target="#myModal">17:00<br>18:00</td>
-          <td data-toggle="modal" data-target="#myModal">17:00<br>18:00</td>
-          <td data-toggle="modal" data-target="#myModal">17:00<br>18:00</td>
-          <td data-toggle="modal" data-target="#myModal">17:00<br>18:00</td>
-          <td data-toggle="modal" data-target="#myModal">-</td>
-          <td data-toggle="modal" data-target="#myModal">17:00<br>18:00</td>
-          <td data-toggle="modal" data-target="#myModal">17:00<br>18:00</td>
-          <td data-toggle="modal" data-target="#myModal">17:00<br>18:00</td>
-          <td>金谷</td>
-          </tr>
-
-          <tr>
-            <td>益田</td>
-            <td data-toggle="modal" data-target="#myModal">17:00<br>18:00</td>
-            <td data-toggle="modal" data-target="#myModal">-</td>
-            <td data-toggle="modal" data-target="#myModal">17:00<br>18:00</td>
-            <td data-toggle="modal" data-target="#myModal">17:00<br>18:00</td>
-            <td data-toggle="modal" data-target="#myModal">17:00<br>18:00</td>
-            <td data-toggle="modal" data-target="#myModal">17:00<br>18:00</td>
-            <td data-toggle="modal" data-target="#myModal">17:00<br>18:00</td>
-            <td data-toggle="modal" data-target="#myModal">17:00<br>18:00</td>
-            <td data-toggle="modal" data-target="#myModal">17:00<br>18:00</td>
-            <td data-toggle="modal" data-target="#myModal">17:00<br>18:00</td>
-            <td data-toggle="modal" data-target="#myModal">17:00<br>18:00</td>
-            <td data-toggle="modal" data-target="#myModal">17:00<br>18:00</td>
-            <td data-toggle="modal" data-target="#myModal">17:00<br>18:00</td>
-            <td data-toggle="modal" data-target="#myModal">17:00<br>18:00</td>
-            <td data-toggle="modal" data-target="#myModal">17:00<br>18:00</td>
-            <td data-toggle="modal" data-target="#myModal">17:00<br>18:00</td>
-            <td data-toggle="modal" data-target="#myModal">17:00<br>18:00</td>
-            <td data-toggle="modal" data-target="#myModal">17:00<br>18:00</td>
-            <td data-toggle="modal" data-target="#myModal">17:00<br>18:00</td>
-            <td data-toggle="modal" data-target="#myModal">17:00<br>18:00</td>
-            <td data-toggle="modal" data-target="#myModal">17:00<br>18:00</td>
-            <td data-toggle="modal" data-target="#myModal">17:00<br>18:00</td>
-            <td data-toggle="modal" data-target="#myModal">17:00<br>18:00</td>
-            <td data-toggle="modal" data-target="#myModal">17:00<br>18:00</td>
-            <td data-toggle="modal" data-target="#myModal">17:00<br>18:00</td>
-            <td data-toggle="modal" data-target="#myModal">17:00<br>18:00</td>
-            <td data-toggle="modal" data-target="#myModal">17:00<br>18:00</td>
-            <td data-toggle="modal" data-target="#myModal">17:00<br>18:00</td>
-            <td data-toggle="modal" data-target="#myModal">17:00<br>18:00</td>
-            <td data-toggle="modal" data-target="#myModal">17:00<br>18:00</td>
-            <td>益田</td>
-          </tr>
-
+          @endforeach
         </tbody>
-      </table>
-    </div>
+  <!--------------------------------------------------->
+  <!--              各従業員の勤務 END               -->
+  <!--------------------------------------------------->
+    </table>
+   </div>
+</main>
 
-  </main>
-
-  <!-- Modal -->
+  <!--------------------------------------------------->
+  <!--                  MODAL START                  -->
+  <!--------------------------------------------------->
   <div id="myModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
-
-      <!-- Modal content-->
       <div class="modal-content">
 
+        <!-- header -->
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h4 class="modal-title">長野</h4>
           <h4 class="modal-title">2020年6月21日</h4>
         </div>
 
+        <!-- body -->
         <div class="modal-body">
           <p>出勤時間：<input type="time" class=" form-control" id="usr"></p>
           <p>退勤時間：<input type="time" class=" form-control" name="" id=""></p>
           <button type="button" class="btn btn-default btn-danger" data-dismiss="modal">休暇</button>
         </div>
 
+        <!-- footer -->
         <div class=" modal-footer">
           <button type="button" class="btn btn-default btn-success" data-dismiss="modal">決定</button>
         </div>
 
       </div>
-
     </div>
   </div>
+  <!--------------------------------------------------->
+  <!--                  MODAL END                    -->
+  <!--------------------------------------------------->
 
 </body>
 
