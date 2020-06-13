@@ -157,15 +157,15 @@
         <!-- header -->
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title" id="modal_name">長野</h4>
-          <h4 class="modal-subtitle" id="modal_day">2020年6月21日</h4>
+          <h4 class="modal-title" id="modal_name"></h4>
+          <h4 class="modal-subtitle" id="modal_day"></h4>
         </div>
 
         <!-- body -->
         <div class="modal-body">
           <p>出勤時間：<input type="time" class=" form-control" id="start"></p>
           <p>退勤時間：<input type="time" class=" form-control" id="end"></p>
-          <button type="button" class="btn btn-default btn-danger" data-dismiss="modal">休暇</button>
+          <button type="button" class="btn btn-default btn-danger" data-dismiss="modal">削除</button>
         </div>
 
         <!-- footer -->
@@ -203,9 +203,7 @@ $('#myModal').on('show.bs.modal', function (event) {
 	  modal.find('.modal-body input#start').val(editstarttime);
 	  modal.find('.modal-body input#end').val(editendtime);
 });
-  function test(flag) {
-    const array = @json($employee);
-  }
+
 </script>
 </body>
 
