@@ -35,15 +35,15 @@
     <div class="selectctrl">
 
   <!--------------------------------------------------->
-  <!--                 SELECT(日時) START            -->
+  <!--               SELECT(日時) START            -->
   <!--------------------------------------------------->
 
       <label for="sel1">年月:</label>
       <select class="form-control" onChange="location.href=value;">
 
         <!-- 選択中の日付より前の日付 -->
-        @for ($i = 4;$i > 0;$i--)
-        <option value="../{{$checkdt -> copy() -> subMonth($i) -> year}}/{{$checkdt -> copy() -> subMonth($i) -> month}}">
+        @for ($i = 10;$i > 0;$i--)
+        <option value="../../{{$checkdt -> copy() -> subMonth($i) -> year}}/{{$checkdt -> copy() -> subMonth($i) -> month}}/{{$checkuser}}">
         {{$checkdt -> copy() -> subMonth($i) -> year}}/{{$checkdt -> copy() -> subMonth($i) -> month}}
         </option>
         @endfor
@@ -52,33 +52,42 @@
         <option selected>{{$checkdt -> year}}/{{$checkdt -> month}}
 
         <!-- 選択中の日付より後の日付 -->
-        @for ($i = 1;$i <= 4;$i++)
-        <option value="../{{$checkdt -> copy() -> addMonth($i) -> year}}/{{$checkdt -> copy() -> addMonth($i) -> month}}">
+        @for ($i = 1;$i <= 10;$i++)
+        <option value="../../{{$checkdt -> copy() -> addMonth($i) -> year}}/{{$checkdt -> copy() -> addMonth($i) -> month}}/{{$checkuser}}">
         {{$checkdt -> copy() -> addMonth($i) -> year}}/{{$checkdt -> copy() -> addMonth($i) -> month}}
         </option>
         @endfor
 
       </select>
   <!--------------------------------------------------->
-  <!--                 SELECT(日時) START            -->
+  <!--                 SELECT(日時) END              -->
   <!--------------------------------------------------->    
-    
+
+  <!--------------------------------------------------->
+  <!--                SELECT(ユーザー) START         -->
+  <!--------------------------------------------------->    
       <label for="sel1">ユーザー:</label>
-      <select class="form-control">
-        <option>全て</option>
+      <select class="form-control" onChange="location.href=value;">
+        <option selected>{{$checkuser}}</option>
+        <option value="./all">全て</option>
         @foreach ($employee as $user)
-        <option>{{$user}}</option>
+        @if ($user != $checkuser)
+        <option value="./{{$user}}">{{$user}}</option>
+        @endif
         @endforeach
       </select>
     </div>
+  <!--------------------------------------------------->
+  <!--                SELECT(ユーザー) END           -->
+  <!--------------------------------------------------->    
 
-    <div class="table">
-      <table class="table table-striped" border-collapse="collapse">
-        <thead>
 
   <!--------------------------------------------------->
   <!--                   曜日 START                  -->
   <!--------------------------------------------------->
+      <div class="table">
+      <table class="table table-striped" border-collapse="collapse">
+        <thead>
           <tr class="active">
             <th>Hallstaff</th>
             @foreach ($date as $day)
@@ -111,6 +120,7 @@
   <!--------------------------------------------------->
         <tbody>
           @foreach ($employee as $user)
+          @if ($checkuser == $user || $checkuser == "all")
           <tr>
             <td>{{$user}}</td>
             @foreach ($date as $day)
@@ -118,14 +128,16 @@
             @endforeach
             <td>{{$user}}</td>
           </tr>
+          @endif
           @endforeach
         </tbody>
+      </table>
+   </div>
+</main>
   <!--------------------------------------------------->
   <!--              各従業員の勤務 END               -->
   <!--------------------------------------------------->
-    </table>
-   </div>
-</main>
+
 
   <!--------------------------------------------------->
   <!--                  MODAL START                  -->
