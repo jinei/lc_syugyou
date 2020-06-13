@@ -7,19 +7,12 @@ use Carbon\Carbon;
 
 class timelineController extends Controller
 {
-    public function index($checkdate="")
+    public function index($checkyear,$checkmonth)
     {   
-        // パラメータがない場合(現在日付の日付データ取得)
-        if($checkdate == "") {
-            $checkdt = Carbon::now();
+        Carbon::useMonthsOverflow(false); //日付の加算方法を変更
 
         // パラメータがある場合（指定した日付の日付データ取得）
-        } else {
-            $checkyear = substr($checkdate, 0,4);
-            $checkmonth = substr($checkdate,-1);
-            $checkdt = Carbon::create($checkyear,$checkmonth);
-        }
-
+        $checkdt = Carbon::create($checkyear,$checkmonth);
         $lastday = $checkdt->endOfMonth()->day; //末日の取得
         $date = array(); //日付データを入れる配列
 
@@ -31,7 +24,7 @@ class timelineController extends Controller
 
         $weekday = ['日', '月', '火', '水', '木', '金', '土']; //曜日変換用
         $employee = ["長野","金谷","益田"]; //従業員のデータ
-        
+
         return view('timeline.index',compact('employee','lastday','date','weekday','checkdt'));
     }
 }

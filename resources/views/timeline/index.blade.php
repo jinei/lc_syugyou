@@ -17,7 +17,7 @@
   <nav class="navbar navbar-inverse">
     <div class="container-fluid">
       <div class="navbar-header">
-        <a class="navbar-brand" href="#">{{$checkdt}}</a>
+        <a class="navbar-brand" href="#">ホルトガーデン</a>
       </div>
       <ul class="nav navbar-nav">
         <li class="active"><a href="#">勤務表</a></li>
@@ -33,13 +33,36 @@
   <main>
 
     <div class="selectctrl">
+
+  <!--------------------------------------------------->
+  <!--                 SELECT(日時) START            -->
+  <!--------------------------------------------------->
+
       <label for="sel1">年月:</label>
-      <select class="form-control">
-        <option>2020/6</option>
-        <option>2020/7</option>
-        <option>2020/8</option>
-        <option>2020/9</option>
+      <select class="form-control" onChange="location.href=value;">
+
+        <!-- 選択中の日付より前の日付 -->
+        @for ($i = 4;$i > 0;$i--)
+        <option value="../{{$checkdt -> copy() -> subMonth($i) -> year}}/{{$checkdt -> copy() -> subMonth($i) -> month}}">
+        {{$checkdt -> copy() -> subMonth($i) -> year}}/{{$checkdt -> copy() -> subMonth($i) -> month}}
+        </option>
+        @endfor
+
+        <!-- 選択中の日付-->
+        <option selected>{{$checkdt -> year}}/{{$checkdt -> month}}
+
+        <!-- 選択中の日付より後の日付 -->
+        @for ($i = 1;$i <= 4;$i++)
+        <option value="../{{$checkdt -> copy() -> addMonth($i) -> year}}/{{$checkdt -> copy() -> addMonth($i) -> month}}">
+        {{$checkdt -> copy() -> addMonth($i) -> year}}/{{$checkdt -> copy() -> addMonth($i) -> month}}
+        </option>
+        @endfor
+
       </select>
+  <!--------------------------------------------------->
+  <!--                 SELECT(日時) START            -->
+  <!--------------------------------------------------->    
+    
       <label for="sel1">ユーザー:</label>
       <select class="form-control">
         <option>全て</option>
