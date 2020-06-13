@@ -10,7 +10,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <link href="{{ asset('style.css') }}" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
-  <script src="script.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -128,7 +128,8 @@
             @for ($j = 0;$j < count($date);$j++)
             <!-- その日付に出勤情報があれば出勤時間と退勤時間を出力 -->
             @if ( in_array($date[$j] -> day, $employee[$i]['day']))
-            <td data-toggle="modal" data-target="#myModal" onclick="test({{$i}})">{{$employee[$i]['starttime'][array_search($date[$j] -> day, $employee[$i]['day'])]}}<br>{{$employee[$i]['endtime'][array_search($date[$j] -> day, $employee[$i]['day'])]}}</td>
+            <td data-toggle="modal" data-target="#myModal" data-user="{{$employee[$i]['userid']}}" data-day="{{$date[$j]}}" data-start="{{$employee[$i]['starttime'][array_search($date[$j] -> day, $employee[$i]['day'])]}}" data-end="{{$employee[$i]['endtime'][array_search($date[$j] -> day, $employee[$i]['day'])]}}">
+            {{$employee[$i]['starttime'][array_search($date[$j] -> day, $employee[$i]['day'])]}}<br>{{$employee[$i]['endtime'][array_search($date[$j] -> day, $employee[$i]['day'])]}}</td>
             @else
             <td data-toggle="modal" data-target="#myModal">-</td>
             @endif
@@ -180,9 +181,29 @@
   <!--------------------------------------------------->
 
 <script>
+$('#myModal').on('show.bs.modal', function (event) {
+    //モーダルを開いたボタンを取得
+    let data =@json($employee);
+
+    const button = $(event.relatedTarget);
+    const edituserid = button.data('user');
+    const editdate = button.data('day').split("-");
+    const edityear = parseInt(editdate[0],10);
+    const editmonth = parseInt(editdate[1],10);
+    const editday = parseInt(editdate[2].split(" ")[0],10);
+    const editusername = data[edituserid].name;
+    const editstarttime = button.data('start');
+    const editendtime = button.data('end');
+    console.log(edituserid);
+    console.log(editusername)
+    console.log(edityear)
+    console.log(editmonth)
+    console.log(editday);
+    console.log(editstarttime);
+    console.log(editendtime);
+});
   function test(flag) {
     const array = @json($employee);
-    console.log(array[flag]);
   }
 </script>
 </body>
