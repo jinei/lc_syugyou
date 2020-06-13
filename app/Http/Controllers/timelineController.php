@@ -26,8 +26,8 @@ class timelineController extends Controller
         // ユーザーIDとユーザー名の追加
         $usercollection = collect(['userid', 'name','starttime','endtime','day']);
         $data = ["全て","長野","金谷","益田"]; //従業員のデータ
-        $starttime = [1700,1800];
-        $endtime = [2100,2300];
+        $starttime = ["17:00","18:00"];
+        $endtime = ["21:00","23:00"];
         $day = [3,8];
         for($i = 0;$i < 4;$i++) {
             $employee[$i] = $usercollection->combine([$i,$data[$i],$starttime,$endtime,$day]);

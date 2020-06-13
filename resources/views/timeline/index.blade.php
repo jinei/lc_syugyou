@@ -131,7 +131,7 @@
             <td data-toggle="modal" data-target="#myModal" data-user="{{$employee[$i]['userid']}}" data-day="{{$date[$j]}}" data-start="{{$employee[$i]['starttime'][array_search($date[$j] -> day, $employee[$i]['day'])]}}" data-end="{{$employee[$i]['endtime'][array_search($date[$j] -> day, $employee[$i]['day'])]}}">
             {{$employee[$i]['starttime'][array_search($date[$j] -> day, $employee[$i]['day'])]}}<br>{{$employee[$i]['endtime'][array_search($date[$j] -> day, $employee[$i]['day'])]}}</td>
             @else
-            <td data-toggle="modal" data-target="#myModal">-</td>
+            <td data-toggle="modal" data-target="#myModal" data-user="{{$employee[$i]['userid']}}" data-day="{{$date[$j]}}" data-start="" data-end=""> -</td>
             @endif
             @endfor
             <td>{{$employee[$i]['name']}}</td>
@@ -158,13 +158,13 @@
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h4 class="modal-title" id="modal_name">長野</h4>
-          <h4 class="modal-title" id="modal_day">2020年6月21日</h4>
+          <h4 class="modal-subtitle" id="modal_day">2020年6月21日</h4>
         </div>
 
         <!-- body -->
         <div class="modal-body">
-          <p>出勤時間：<input type="time" class=" form-control" id="usr"></p>
-          <p>退勤時間：<input type="time" class=" form-control" name="" id=""></p>
+          <p>出勤時間：<input type="time" class=" form-control" id="start"></p>
+          <p>退勤時間：<input type="time" class=" form-control" id="end"></p>
           <button type="button" class="btn btn-default btn-danger" data-dismiss="modal">休暇</button>
         </div>
 
@@ -185,6 +185,7 @@ $('#myModal').on('show.bs.modal', function (event) {
     //モーダルを開いたボタンを取得
     let data =@json($employee);
 
+    // クリックした箇所の情報を取得
     const button = $(event.relatedTarget);
     const edituserid = button.data('user');
     const editdate = button.data('day').split("-");
@@ -194,13 +195,13 @@ $('#myModal').on('show.bs.modal', function (event) {
     const editusername = data[edituserid].name;
     const editstarttime = button.data('start');
     const editendtime = button.data('end');
-    console.log(edituserid);
-    console.log(editusername)
-    console.log(edityear)
-    console.log(editmonth)
-    console.log(editday);
-    console.log(editstarttime);
-    console.log(editendtime);
+
+    // ダイアログに情報出力
+    var modal = $(this)
+    modal.find('.modal-title').text(editusername) 
+    modal.find('.modal-subtitle').text(edityear + "年" + editmonth + "月" + editday + "日") 
+	  modal.find('.modal-body input#start').val(editstarttime);
+	  modal.find('.modal-body input#end').val(editendtime);
 });
   function test(flag) {
     const array = @json($employee);
