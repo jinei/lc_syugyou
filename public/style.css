@@ -7,7 +7,9 @@ main {
 th,td {
   min-width: 5vw;
   text-align: center;
-  cursor: pointer;
+}
+td {
+    cursor: pointer;
 }
 td:hover {
   background-color: #908e8e;
