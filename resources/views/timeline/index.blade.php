@@ -35,7 +35,7 @@
     <div class="selectctrl">
 
   <!--------------------------------------------------->
-  <!--               SELECT(日時) START            -->
+  <!--               SELECT*日時* START            -->
   <!--------------------------------------------------->
 
       <label for="sel1">年月:</label>
@@ -43,7 +43,7 @@
 
         <!-- 選択中の日付より前の日付 -->
         @for ($i = 10;$i > 0;$i--)
-        <option value="../../{{$checkdt -> copy() -> subMonth($i) -> year}}/{{$checkdt -> copy() -> subMonth($i) -> month}}/{{$checkuser}}">
+        <option value="../../{{$checkdt -> copy() -> subMonth($i) -> year}}/{{$checkdt -> copy() -> subMonth($i) -> month}}/{{$checkuserid}}">
         {{$checkdt -> copy() -> subMonth($i) -> year}}/{{$checkdt -> copy() -> subMonth($i) -> month}}
         </option>
         @endfor
@@ -53,32 +53,31 @@
 
         <!-- 選択中の日付より後の日付 -->
         @for ($i = 1;$i <= 10;$i++)
-        <option value="../../{{$checkdt -> copy() -> addMonth($i) -> year}}/{{$checkdt -> copy() -> addMonth($i) -> month}}/{{$checkuser}}">
+        <option value="../../{{$checkdt -> copy() -> addMonth($i) -> year}}/{{$checkdt -> copy() -> addMonth($i) -> month}}/{{$checkuserid}}">
         {{$checkdt -> copy() -> addMonth($i) -> year}}/{{$checkdt -> copy() -> addMonth($i) -> month}}
         </option>
         @endfor
 
       </select>
   <!--------------------------------------------------->
-  <!--                 SELECT(日時) END              -->
+  <!--                 SELECT*日時* END              -->
   <!--------------------------------------------------->    
 
   <!--------------------------------------------------->
-  <!--                SELECT(ユーザー) START         -->
+  <!--                SELECT*ユーザー* START         -->
   <!--------------------------------------------------->    
       <label for="sel1">ユーザー:</label>
       <select class="form-control" onChange="location.href=value;">
-        <option selected>{{$checkuser}}</option>
-        <option value="./all">全て</option>
-        @foreach ($employee as $user)
-        @if ($user != $checkuser)
-        <option value="./{{$user}}">{{$user}}</option>
+        <option selected>{{$combined[$checkuserid]['name']}}</option>
+        @for ($i = 0;$i < count($combined);$i++)
+        @if ($combined[$i]['id'] != $checkuserid)
+        <option value="./{{$combined[$i]['id']}}">{{$combined[$i]["name"]}}</option>
         @endif
-        @endforeach
+        @endfor
       </select>
     </div>
   <!--------------------------------------------------->
-  <!--                SELECT(ユーザー) END           -->
+  <!--                SELECT*ユーザー* END           -->
   <!--------------------------------------------------->    
 
 
@@ -119,17 +118,17 @@
   <!--              各従業員の勤務 START             -->
   <!--------------------------------------------------->
         <tbody>
-          @foreach ($employee as $user)
-          @if ($checkuser == $user || $checkuser == "all")
+        @for ($i = 1;$i < count($combined);$i++)
+          @if ($checkuserid == $combined[$i]['id'] || $checkuserid == 0)
           <tr>
-            <td>{{$user}}</td>
+            <td>{{$combined[$i]['name']}}</td>
             @foreach ($date as $day)
             <td data-toggle="modal" data-target="#myModal">17:00<br>18:00</td>
             @endforeach
-            <td>{{$user}}</td>
+            <td>{{$combined[$i]['name']}}</td>
           </tr>
           @endif
-          @endforeach
+          @endfor
         </tbody>
       </table>
    </div>

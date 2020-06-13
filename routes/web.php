@@ -17,4 +17,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('timeline/{checkyear}/{checkmonth}/{checkuser}','timelineController@index');
+Route::get('timeline/{checkyear}/{checkmonth}/{checkuserid}','timelineController@index');
