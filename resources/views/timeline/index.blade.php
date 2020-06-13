@@ -68,10 +68,10 @@
   <!--------------------------------------------------->    
       <label for="sel1">ユーザー:</label>
       <select class="form-control" onChange="location.href=value;">
-        <option selected>{{$combined[$checkuserid]['name']}}</option>
-        @for ($i = 0;$i < count($combined);$i++)
-        @if ($combined[$i]['id'] != $checkuserid)
-        <option value="./{{$combined[$i]['id']}}">{{$combined[$i]["name"]}}</option>
+        <option selected>{{$employee[$checkuserid]['name']}}</option>
+        @for ($i = 0;$i < count($employee);$i++)
+        @if ($employee[$i]['userid'] != $checkuserid)
+        <option value="./{{$employee[$i]['userid']}}">{{$employee[$i]["name"]}}</option>
         @endif
         @endfor
       </select>
@@ -118,14 +118,18 @@
   <!--              各従業員の勤務 START             -->
   <!--------------------------------------------------->
         <tbody>
-        @for ($i = 1;$i < count($combined);$i++)
-          @if ($checkuserid == $combined[$i]['id'] || $checkuserid == 0)
+        @for ($i = 1;$i < count($employee);$i++)
+          @if ($checkuserid == $employee[$i]['userid'] || $checkuserid == 0)
           <tr>
-            <td>{{$combined[$i]['name']}}</td>
-            @foreach ($date as $day)
-            <td data-toggle="modal" data-target="#myModal">17:00<br>18:00</td>
-            @endforeach
-            <td>{{$combined[$i]['name']}}</td>
+            <td>{{$employee[$i]['name']}}</td>
+            @for ($j = 0;$j < count($date);$j++)
+            @if ( in_array($date[$j] -> day, $employee[$i]['day']))
+            <td data-toggle="modal" data-target="#myModal">{{$timeline[$j]['starttime']}}<br>{{$timeline[$j]['endtime']}}</td>
+            @else
+            <td data-toggle="modal" data-target="#myModal">-</td>
+            @endif
+            @endfor
+            <td>{{$employee[$i]['name']}}</td>
           </tr>
           @endif
           @endfor
