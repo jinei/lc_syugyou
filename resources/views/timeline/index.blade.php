@@ -90,36 +90,9 @@
           @foreach ($employee as $user)
           <tr>
             <td>{{$user}}</td>
+            @foreach ($date as $day)
             <td data-toggle="modal" data-target="#myModal">17:00<br>18:00</td>
-            <td data-toggle="modal" data-target="#myModal">17:00<br>18:00</td>
-            <td data-toggle="modal" data-target="#myModal">17:00<br>18:00</td>
-            <td data-toggle="modal" data-target="#myModal">17:00<br>18:00</td>
-            <td data-toggle="modal" data-target="#myModal">-</td>
-            <td data-toggle="modal" data-target="#myModal">17:00<br>18:00</td>
-            <td data-toggle="modal" data-target="#myModal">17:00<br>18:00</td>
-            <td data-toggle="modal" data-target="#myModal">17:00<br>18:00</td>
-            <td data-toggle="modal" data-target="#myModal">17:00<br>18:00</td>
-            <td data-toggle="modal" data-target="#myModal">17:00<br>18:00</td>
-            <td data-toggle="modal" data-target="#myModal">17:00<br>18:00</td>
-            <td data-toggle="modal" data-target="#myModal">17:00<br>18:00</td>
-            <td data-toggle="modal" data-target="#myModal">17:00<br>18:00</td>
-            <td data-toggle="modal" data-target="#myModal">17:00<br>18:00</td>
-            <td data-toggle="modal" data-target="#myModal">17:00<br>18:00</td>
-            <td data-toggle="modal" data-target="#myModal">17:00<br>18:00</td>
-            <td data-toggle="modal" data-target="#myModal">17:00<br>18:00</td>
-            <td data-toggle="modal" data-target="#myModal">17:00<br>18:00</td>
-            <td data-toggle="modal" data-target="#myModal">17:00<br>18:00</td>
-            <td data-toggle="modal" data-target="#myModal">17:00<br>18:00</td>
-            <td data-toggle="modal" data-target="#myModal">17:00<br>18:00</td>
-            <td data-toggle="modal" data-target="#myModal">17:00<br>18:00</td>
-            <td data-toggle="modal" data-target="#myModal">17:00<br>18:00</td>
-            <td data-toggle="modal" data-target="#myModal">17:00<br>18:00</td>
-            <td data-toggle="modal" data-target="#myModal">17:00<br>18:00</td>
-            <td data-toggle="modal" data-target="#myModal">17:00<br>18:00</td>
-            <td data-toggle="modal" data-target="#myModal">17:00<br>18:00</td>
-            <td data-toggle="modal" data-target="#myModal">17:00<br>18:00</td>
-            <td data-toggle="modal" data-target="#myModal">17:00<br>18:00</td>
-            <td data-toggle="modal" data-target="#myModal">17:00<br>18:00</td>
+            @endforeach
             <td>{{$user}}</td>
           </tr>
           @endforeach
