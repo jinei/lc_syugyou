@@ -7,7 +7,7 @@ use Carbon\Carbon;
 
 class timelineController extends Controller
 {
-    public function index()
+    public function index($checkdate="")
     {   
         $lastday = Carbon::now()->endOfMonth()->day;
         $date = array();
@@ -18,6 +18,6 @@ class timelineController extends Controller
         }
         $weekday = ['日', '月', '火', '水', '木', '金', '土'];
         $employee = ["長野","金谷","益田"];
-        return view('timeline.index',compact('employee','lastday','date','weekday'));
+        return view('timeline.index',compact('employee','lastday','date','weekday','checkdate'));
     }
 }
