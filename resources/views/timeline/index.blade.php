@@ -118,13 +118,17 @@
   <!--              各従業員の勤務 START             -->
   <!--------------------------------------------------->
         <tbody>
+        <!-- 従業員の数だけ繰り返す -->
         @for ($i = 1;$i < count($employee);$i++)
+          <!-- 表示中のユーザーかどうかの判定 -->
           @if ($checkuserid == $employee[$i]['userid'] || $checkuserid == 0)
           <tr>
             <td>{{$employee[$i]['name']}}</td>
+            <!-- 一ヶ月分繰り返す -->
             @for ($j = 0;$j < count($date);$j++)
+            <!-- その日付に出勤情報があれば出勤時間と退勤時間を出力 -->
             @if ( in_array($date[$j] -> day, $employee[$i]['day']))
-            <td data-toggle="modal" data-target="#myModal">{{$timeline[$j]['starttime']}}<br>{{$timeline[$j]['endtime']}}</td>
+            <td data-toggle="modal" data-target="#myModal" onclick="test({{$i}})">{{$employee[$i]['starttime'][array_search($date[$j] -> day, $employee[$i]['day'])]}}<br>{{$employee[$i]['endtime'][array_search($date[$j] -> day, $employee[$i]['day'])]}}</td>
             @else
             <td data-toggle="modal" data-target="#myModal">-</td>
             @endif
@@ -152,8 +156,8 @@
         <!-- header -->
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">長野</h4>
-          <h4 class="modal-title">2020年6月21日</h4>
+          <h4 class="modal-title" id="modal_name">長野</h4>
+          <h4 class="modal-title" id="modal_day">2020年6月21日</h4>
         </div>
 
         <!-- body -->
@@ -175,6 +179,12 @@
   <!--                  MODAL END                    -->
   <!--------------------------------------------------->
 
+<script>
+  function test(flag) {
+    const array = @json($employee);
+    console.log(array[flag]);
+  }
+</script>
 </body>
 
 </html>
