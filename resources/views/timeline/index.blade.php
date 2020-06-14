@@ -162,7 +162,8 @@
   <!--                  MODAL START                  -->
   <!--------------------------------------------------->
   <form action="" method="post">
-  @csrf
+  @csrf 
+
         <div id="myModal" class="modal fade" role="dialog">
           <div class="modal-dialog">
           <div class="modal-content">
@@ -176,6 +177,11 @@
 
           <!-- body -->
           <div class="modal-body">
+          <input type="hidden" id="userid" name="userid">
+          <input type="hidden" id="year" name="year">
+          <input type="hidden" id="month" name="month">
+          <input type="hidden" id="day" name="day">
+
             <p>出勤時間：<input type="time" class=" form-control" id="start" name="start"></p>
             <p>退勤時間：<input type="time" class=" form-control" id="end" name="end"></p>
             <button type="button" class="btn btn-default btn-danger" data-dismiss="modal">削除</button>
@@ -214,6 +220,10 @@ $('#myModal').on('show.bs.modal', function (event) {
     var modal = $(this)
     modal.find('.modal-title').text(editusername) 
     modal.find('.modal-subtitle').text(edityear + "年" + editmonth + "月" + editday + "日") 
+    modal.find('.modal-body input#userid').val(edituserid);
+    modal.find('.modal-body input#year').val(edityear);
+    modal.find('.modal-body input#month').val(editmonth);
+    modal.find('.modal-body input#day').val(editday);
 	  modal.find('.modal-body input#start').val(editstarttime);
 	  modal.find('.modal-body input#end').val(editendtime);
 });

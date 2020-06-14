@@ -49,8 +49,8 @@ class timelineController extends Controller
     }
     public function add(Request $request)
 	{   
-        $data1 = $request::all();
-        DB::insert('insert into employee(name) values("'.$data1['start'].'")');
+        $requestdata = $request::all();
+        DB::insert('insert into working(userid,starttime,endtime,year,month,day) values("'.$requestdata['userid'].'","'.$requestdata['start'].'","'.$requestdata['end'].'",'.$requestdata['year'].','.$requestdata['month'].','.$requestdata['day'].')');
 	    return redirect($_SERVER['REQUEST_URI']);
 	}
 }
