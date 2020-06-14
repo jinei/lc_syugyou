@@ -13,11 +13,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Route::get('timeline/{checkyear}/{checkmonth}/{checkuserid}','timelineController@index');
 Route::post('timeline/{checkyear}/{checkmonth}/{checkuserid}','timelineController@databaseoperation');
 
-Route::get('login','LoginController@index');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

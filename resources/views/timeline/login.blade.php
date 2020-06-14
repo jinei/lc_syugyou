@@ -16,10 +16,13 @@
 </head>
 
 <body>
+  <!--------------------------------------------------->
+  <!--              ログインフォーム START           -->
+  <!--------------------------------------------------->
 <div class="text-center" style="padding:50px 0">
-	<div class="logo">LOGIN</div>
+	<div class="logo">{{$message}}</div>
 	<div class="login-form-1">
-		<form id="login-form" class="text-left">
+		<form id="login-form" class="text-left" action="test">
 			<div class="login-form-main-message"></div>
 			<div class="main-login-form">
 				<div class="login-group">
@@ -35,8 +38,11 @@
 			</div>
 		</form>
 	</div>
+  </div>
 </div>
-</div>
+  <!--------------------------------------------------->
+  <!--              ログインフォーム END             -->
+  <!--------------------------------------------------->
 </body>
 
 </html>
