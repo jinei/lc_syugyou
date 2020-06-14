@@ -49,19 +49,23 @@ class timelineController extends Controller
         return view('timeline.index',compact('data','lastday','date','weekday','checkdt','checkuserid','working'));
     }
 
-    
-    public function add(Request $request)
+    public function databaseoperation(Request $request)
 	{   
         $requestdata = $request::all();
-
-        // INSERT
-        if($requestdata['workingid'] == "") {
-        DB::insert('insert into working(userid,starttime,endtime,year,month,day) values("'.$requestdata['userid'].'","'.$requestdata['start'].'","'.$requestdata['end'].'",'.$requestdata['year'].','.$requestdata['month'].','.$requestdata['day'].')');
-
-        // UPDATE
-        } else {
-        DB::update('update working set starttime = "'.$requestdata['start'].'",endtime = "'.$requestdata['end'].'" where id = '.$requestdata['workingid']);
+        
+        if (Request::get('add')){
+            // INSERT
+            if($requestdata['workingid'] == "") {
+            DB::insert('insert into working(userid,starttime,endtime,year,month,day) values("'.$requestdata['userid'].'","'.$requestdata['start'].'","'.$requestdata['end'].'",'.$requestdata['year'].','.$requestdata['month'].','.$requestdata['day'].')');
+            // UPDATE
+            } else {
+            DB::update('update working set starttime = "'.$requestdata['start'].'",endtime = "'.$requestdata['end'].'" where id = '.$requestdata['workingid']);
+            }
+        } elseif (Request::get('delete')){
+            DB::delete('delete from working where id = '.$requestdata['workingid']);
         }
+      
 	    return redirect($_SERVER['REQUEST_URI']);
-	}
+    }
+    
 }

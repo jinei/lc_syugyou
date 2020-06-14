@@ -170,7 +170,6 @@
   <!--------------------------------------------------->
   <form action="" method="post">
   @csrf 
-
         <div id="myModal" class="modal fade" role="dialog">
           <div class="modal-dialog">
           <div class="modal-content">
@@ -192,12 +191,12 @@
 
             <p>出勤時間：<input type="time" class=" form-control" id="start" name="start"></p>
             <p>退勤時間：<input type="time" class=" form-control" id="end" name="end"></p>
-            <button type="button" class="btn btn-default btn-danger" data-dismiss="modal">削除</button>
+            <input type="submit" class="btn btn-default btn-danger" value="削除" name="delete">       
           </div>
 
           <!-- footer -->
-          <div class=" modal-footer">
-            <input type="submit" class="btn btn-default btn-success" value="決定" >
+          <div class="modal-footer">
+            <input type="submit" class="btn btn-default btn-success" value="決定" name="add">
           </div>
 
       </div>
