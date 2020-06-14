@@ -77,7 +77,7 @@
       @endif
 
       <!-- ユーザー選択 -->
-      @foreach ($employee as $item)
+      @foreach ($data as $item)
       @if ($checkuserid == $item['userid'])
       <option selected>{{$item['name']}}</option>
       @else
@@ -130,7 +130,7 @@
   <!--------------------------------------------------->
         <tbody>
         <!-- 従業員の数だけ繰り返す -->
-        @foreach ($employee as $empitem)
+        @foreach ($data as $empitem)
           <!-- 表示中のユーザーかどうかの判定 -->
           @if ($checkuserid == $empitem['userid'] || $checkuserid == 0)
           <tr>
@@ -194,8 +194,7 @@
 <script>
 $('#myModal').on('show.bs.modal', function (event) {
     //モーダルを開いたボタンを取得
-    let data =@json($employee);
-
+    let data =@json($data);
     // クリックした箇所の情報を取得
     const button = $(event.relatedTarget);
     const edituserid = button.data('user');
