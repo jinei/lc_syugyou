@@ -29,7 +29,7 @@ class timelineController extends Controller
         // $test = DB::select('select * from employee');
 
         // ユーザーIDとユーザー名の追加
-        $usercollection = collect(['userid','name','starttime','endtime','day']);
+        $usercollection = collect(['userid','name','starttime','endtime','day','workingid']);
         $employee = DB::select('select * from employee');//従業員のデータ
 
         for($i = 0;$i < count($employee);$i++) {
@@ -37,10 +37,11 @@ class timelineController extends Controller
             $working = DB::select('select * from working where year='.$checkdt->year.' and month='.$checkdt->month.' and userid='.$employee[$i]->userid);
             $starttime = array_column($working, 'starttime'); //勤務開始時間
             $endtime = array_column($working, 'endtime'); //勤務終了時間
+            $workingid = array_column($working, 'id');
             $day = array_column($working, 'day'); //勤務日
 
             // データをユーザーごとにコレクションに格納
-            $data[$employee[$i]->userid] = $usercollection->combine([$employee[$i]->userid,$employee[$i]->name,$starttime,$endtime,$day]);
+            $data[$employee[$i]->userid] = $usercollection->combine([$employee[$i]->userid,$employee[$i]->name,$starttime,$endtime,$day,$workingid]);
         }
         
         $weekday = ['日', '月', '火', '水', '木', '金', '土']; //曜日変換用
@@ -52,12 +53,12 @@ class timelineController extends Controller
         $requestdata = $request::all();
 
         // INSERT
-        if($requestdata['sqlflag'] == 0) {
+        if($requestdata['workingid'] == "") {
         DB::insert('insert into working(userid,starttime,endtime,year,month,day) values("'.$requestdata['userid'].'","'.$requestdata['start'].'","'.$requestdata['end'].'",'.$requestdata['year'].','.$requestdata['month'].','.$requestdata['day'].')');
 
         // UPDATE
         } else {
-        DB::update('update working set starttime = "'.$requestdata['start'].'",endtime = "'.$requestdata['end'].'"');
+        DB::update('update working set starttime = "'.$requestdata['start'].'",endtime = "'.$requestdata['end'].'" where id = '.$requestdata['workingid']);
         }
 	    return redirect($_SERVER['REQUEST_URI']);
 	}

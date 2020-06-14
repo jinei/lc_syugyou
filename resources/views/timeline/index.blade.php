@@ -139,7 +139,7 @@
             @foreach ($date as $dateitem)
             <!-- その日付に出勤情報があれば出勤時間と退勤時間を出力 -->
             @if ( in_array($dateitem -> day, $empitem['day']))
-            <td data-toggle="modal" data-target="#myModal" data-user="{{$empitem['userid']}}" data-day="{{$dateitem}}" data-start="{{$empitem['starttime'][array_search($dateitem -> day, $empitem['day'])]}}" data-end="{{$empitem['endtime'][array_search($dateitem -> day, $empitem['day'])]}}">
+            <td data-toggle="modal" data-target="#myModal" data-user="{{$empitem['userid']}}" data-day="{{$dateitem}}" data-start="{{$empitem['starttime'][array_search($dateitem -> day, $empitem['day'])]}}" data-end="{{$empitem['endtime'][array_search($dateitem -> day, $empitem['day'])]}}" data-id="{{$empitem['workingid'][array_search($dateitem -> day, $empitem['day'])]}}">
             {{$empitem['starttime'][array_search($dateitem -> day, $empitem['day'])]}}<br>{{$empitem['endtime'][array_search($dateitem -> day, $empitem['day'])]}}</td>
             @else
             <td data-toggle="modal" data-target="#myModal" data-user="{{$empitem['userid']}}" data-day="{{$dateitem}}" data-start="" data-end=""> -</td>
@@ -181,7 +181,7 @@
           <input type="hidden" id="year" name="year">
           <input type="hidden" id="month" name="month">
           <input type="hidden" id="day" name="day">
-          <input type="hidden" id="sqlflag" name="sqlflag">
+          <input type="hidden" id="workingid" name="workingid">
 
             <p>出勤時間：<input type="time" class=" form-control" id="start" name="start"></p>
             <p>退勤時間：<input type="time" class=" form-control" id="end" name="end"></p>
@@ -216,18 +216,14 @@ $('#myModal').on('show.bs.modal', function (event) {
     const editusername = data[edituserid].name;
     const editstarttime = button.data('start');
     const editendtime = button.data('end');
-    
-    let sqlflag = 0; //0：追加 1：更新
-    // データがある場合（UPDATE)
-    if(editstarttime != "") {
-      sqlflag = 1;
-    }
+    const editworkindid = button.data('id');
+
     // ダイアログに情報出力
     var modal = $(this)
     modal.find('.modal-title').text(editusername) 
     modal.find('.modal-subtitle').text(edityear + "年" + editmonth + "月" + editday + "日") 
     modal.find('.modal-body input#userid').val(edituserid);
-    modal.find('.modal-body input#sqlflag').val(sqlflag);
+    modal.find('.modal-body input#workingid').val(editworkindid);
     modal.find('.modal-body input#year').val(edityear);
     modal.find('.modal-body input#month').val(editmonth);
     modal.find('.modal-body input#day').val(editday);
