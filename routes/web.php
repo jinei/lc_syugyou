@@ -20,3 +20,4 @@ Route::get('/', function () {
 Route::get('timeline/{checkyear}/{checkmonth}/{checkuserid}','timelineController@index');
 Route::post('timeline/{checkyear}/{checkmonth}/{checkuserid}','timelineController@databaseoperation');
 
+Route::get('login','LoginController@index');
