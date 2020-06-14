@@ -6,10 +6,12 @@ main {
 }
 th,td {
   min-width: 5vw;
+  min-height: 10vh;
   text-align: center;
 }
 td {
     cursor: pointer;
+    height: 7vh;
 }
 td:hover {
   background-color: #908e8e;
