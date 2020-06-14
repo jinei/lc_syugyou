@@ -50,7 +50,15 @@ class timelineController extends Controller
     public function add(Request $request)
 	{   
         $requestdata = $request::all();
+
+        // INSERT
+        if($requestdata['sqlflag'] == 0) {
         DB::insert('insert into working(userid,starttime,endtime,year,month,day) values("'.$requestdata['userid'].'","'.$requestdata['start'].'","'.$requestdata['end'].'",'.$requestdata['year'].','.$requestdata['month'].','.$requestdata['day'].')');
+
+        // UPDATE
+        } else {
+        DB::update('update working set starttime = "'.$requestdata['start'].'",endtime = "'.$requestdata['end'].'"');
+        }
 	    return redirect($_SERVER['REQUEST_URI']);
 	}
 }

@@ -181,6 +181,7 @@
           <input type="hidden" id="year" name="year">
           <input type="hidden" id="month" name="month">
           <input type="hidden" id="day" name="day">
+          <input type="hidden" id="sqlflag" name="sqlflag">
 
             <p>出勤時間：<input type="time" class=" form-control" id="start" name="start"></p>
             <p>退勤時間：<input type="time" class=" form-control" id="end" name="end"></p>
@@ -215,12 +216,18 @@ $('#myModal').on('show.bs.modal', function (event) {
     const editusername = data[edituserid].name;
     const editstarttime = button.data('start');
     const editendtime = button.data('end');
-
+    
+    let sqlflag = 0; //0：追加 1：更新
+    // データがある場合（UPDATE)
+    if(editstarttime != "") {
+      sqlflag = 1;
+    }
     // ダイアログに情報出力
     var modal = $(this)
     modal.find('.modal-title').text(editusername) 
     modal.find('.modal-subtitle').text(edityear + "年" + editmonth + "月" + editday + "日") 
     modal.find('.modal-body input#userid').val(edituserid);
+    modal.find('.modal-body input#sqlflag').val(sqlflag);
     modal.find('.modal-body input#year').val(edityear);
     modal.find('.modal-body input#month').val(editmonth);
     modal.find('.modal-body input#day').val(editday);
