@@ -81,10 +81,10 @@
       @if ($checkuserid == $item['userid'])
       <option selected>{{$item['name']}}</option>
       @else
-      <option value="./{{$item['userid']}}">{{$item['name']}}{{$item['userid']}}</option>
+      <option value="./{{$item['userid']}}">{{$item['name']}}</option>
       @endif
       @endforeach
-      
+
       </select>
     </div>
   <!--------------------------------------------------->
@@ -129,7 +129,26 @@
   <!--              各従業員の勤務 START             -->
   <!--------------------------------------------------->
         <tbody>
-
+        <!-- 従業員の数だけ繰り返す -->
+        @foreach ($employee as $empitem)
+          <!-- 表示中のユーザーかどうかの判定 -->
+          @if ($checkuserid == $empitem['userid'] || $checkuserid == 0)
+          <tr>
+            <td>{{$empitem['name']}}</td>
+            <!-- 一ヶ月分繰り返す -->
+            @foreach ($date as $dateitem)
+            <!-- その日付に出勤情報があれば出勤時間と退勤時間を出力 -->
+            @if ( in_array($dateitem -> day, $empitem['day']))
+            <td data-toggle="modal" data-target="#myModal" data-user="{{$empitem['userid']}}" data-day="{{$dateitem}}" data-start="{{$empitem['starttime'][array_search($dateitem -> day, $empitem['day'])]}}" data-end="{{$empitem['endtime'][array_search($dateitem -> day, $empitem['day'])]}}">
+            {{$empitem['starttime'][array_search($dateitem -> day, $empitem['day'])]}}<br>{{$empitem['endtime'][array_search($dateitem -> day, $empitem['day'])]}}</td>
+            @else
+            <td data-toggle="modal" data-target="#myModal" data-user="{{$empitem['userid']}}" data-day="{{$dateitem}}" data-start="" data-end=""> -</td>
+            @endif
+            @endforeach
+            <td>{{$empitem['name']}}</td>
+          </tr>
+          @endif
+          @endforeach
         </tbody>
       </table>
    </div>
