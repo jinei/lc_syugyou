@@ -9,8 +9,9 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <link href="{{ asset('style.css') }}" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>  
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -168,7 +169,7 @@
   <!--------------------------------------------------->
   <!--                  MODAL START                  -->
   <!--------------------------------------------------->
-  <form action="" method="post">
+  <form name="form" action="" method="post" onsubmit="return check();">
   @csrf 
         <div id="myModal" class="modal fade" role="dialog">
           <div class="modal-dialog">
@@ -188,15 +189,16 @@
           <input type="hidden" id="month" name="month">
           <input type="hidden" id="day" name="day">
           <input type="hidden" id="workingid" name="workingid">
+          <input name="key" type="hidden" value="" />
 
             <p>出勤時間：<input type="time" class=" form-control" id="start" name="start"></p>
             <p>退勤時間：<input type="time" class=" form-control" id="end" name="end"></p>
-            <input type="submit" class="btn btn-default btn-danger" value="削除" name="delete">       
+            <input type="submit" class="btn btn-default btn-danger" value="削除" name="delete" onclick="form.key.value='delete'">       
           </div>
 
           <!-- footer -->
           <div class="modal-footer">
-            <input type="submit" class="btn btn-default btn-success" value="決定" name="add">
+            <input type="submit" class="btn btn-default btn-success" value="決定" name="add" onclick="form.key.value='add'">
           </div>
 
       </div>
@@ -209,6 +211,48 @@
   <!--------------------------------------------------->
 
 <script>
+function check() {
+
+  // **********決定ボタン押下時************
+  if(form.key.value == 'add') {
+    let startTime = document.getElementById("start").value;
+    let endTime = document.getElementById("end").value;
+
+    // nullチェック
+    if(startTime == "" || endTime == "") {
+      Swal.fire({
+      icon: 'error',
+      title: '未入力の箇所があります',
+    })
+    return false;
+
+    // 時間チェック（時間の上下がないか)
+    } else {
+      startTime = startTime.split(":")[0] + startTime.split(":")[1];
+      endTime = endTime.split(":")[0] + endTime.split(":")[1];
+      if(startTime <= endTime) {
+        return true;
+      } else {
+        Swal.fire({
+        icon: 'error',
+        title: '時間の入力が不適切です',
+      })
+      return false;
+    }
+  }
+  // **********決定ボタン押下時************
+
+  // **********削除ボタン押下時************
+  } else {
+    const workingid = document.getElementById("workingid").value;
+    if(workingid != "") {
+      return true;
+    } else {
+      return false;
+    }
+  }
+}
+
 // モーダル表示時
 $('#myModal').on('show.bs.modal', function (event) {
 
