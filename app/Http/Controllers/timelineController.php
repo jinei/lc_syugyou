@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+// use Illuminate\Http\Request;
+use Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
@@ -46,4 +47,10 @@ class timelineController extends Controller
   
         return view('timeline.index',compact('data','lastday','date','weekday','checkdt','checkuserid','working'));
     }
+    public function add(Request $request)
+	{   
+        $data1 = $request::all();
+        DB::insert('insert into employee(name) values("'.$data1['start'].'")');
+	    return redirect($_SERVER['REQUEST_URI']);
+	}
 }
