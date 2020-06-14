@@ -68,12 +68,23 @@
   <!--------------------------------------------------->    
       <label for="sel1">ユーザー:</label>
       <select class="form-control" onChange="location.href=value;">
-        <option selected>{{$employee[$checkuserid]['name']}}</option>
-        @for ($i = 0;$i < count($employee);$i++)
-        @if ($employee[$i]['userid'] != $checkuserid)
-        <option value="./{{$employee[$i]['userid']}}">{{$employee[$i]["name"]}}</option>
-        @endif
-        @endfor
+
+      <!-- ユーザーを全選択 -->
+      @if($checkuserid == 0)
+      <option selected>全て</option>
+      @else
+      <option value="./0">全て</option>
+      @endif
+
+      <!-- ユーザー選択 -->
+      @foreach ($employee as $item)
+      @if ($checkuserid == $item['userid'])
+      <option selected>{{$item['name']}}</option>
+      @else
+      <option value="./{{$item['userid']}}">{{$item['name']}}{{$item['userid']}}</option>
+      @endif
+      @endforeach
+      
       </select>
     </div>
   <!--------------------------------------------------->
@@ -118,26 +129,7 @@
   <!--              各従業員の勤務 START             -->
   <!--------------------------------------------------->
         <tbody>
-        <!-- 従業員の数だけ繰り返す -->
-        @for ($i = 1;$i < count($employee);$i++)
-          <!-- 表示中のユーザーかどうかの判定 -->
-          @if ($checkuserid == $employee[$i]['userid'] || $checkuserid == 0)
-          <tr>
-            <td>{{$employee[$i]['name']}}</td>
-            <!-- 一ヶ月分繰り返す -->
-            @for ($j = 0;$j < count($date);$j++)
-            <!-- その日付に出勤情報があれば出勤時間と退勤時間を出力 -->
-            @if ( in_array($date[$j] -> day, $employee[$i]['day']))
-            <td data-toggle="modal" data-target="#myModal" data-user="{{$employee[$i]['userid']}}" data-day="{{$date[$j]}}" data-start="{{$employee[$i]['starttime'][array_search($date[$j] -> day, $employee[$i]['day'])]}}" data-end="{{$employee[$i]['endtime'][array_search($date[$j] -> day, $employee[$i]['day'])]}}">
-            {{$employee[$i]['starttime'][array_search($date[$j] -> day, $employee[$i]['day'])]}}<br>{{$employee[$i]['endtime'][array_search($date[$j] -> day, $employee[$i]['day'])]}}</td>
-            @else
-            <td data-toggle="modal" data-target="#myModal" data-user="{{$employee[$i]['userid']}}" data-day="{{$date[$j]}}" data-start="" data-end=""> -</td>
-            @endif
-            @endfor
-            <td>{{$employee[$i]['name']}}</td>
-          </tr>
-          @endif
-          @endfor
+
         </tbody>
       </table>
    </div>

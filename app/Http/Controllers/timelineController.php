@@ -28,15 +28,14 @@ class timelineController extends Controller
         // $test = DB::select('select * from employee');
 
         // ユーザーIDとユーザー名の追加
-        $usercollection = collect(['userid', 'name','starttime','endtime','day']);
+        $usercollection = collect(['userid','name','starttime','endtime','day']);
         $data = DB::select('select * from employee');//従業員のデータ
         $starttime = ["17:00","18:00"];
         $endtime = ["21:00","23:00"];
         $day = [3,8];
         
-        $employee[0] = $usercollection->combine([0,'全て','','','']);
-        for($i = 1;$i <= count($data);$i++) {
-            $employee[$i] = $usercollection->combine([$data[$i-1]->userid,$data[$i-1] -> name,$starttime,$endtime,$day]);
+        for($i = 0;$i < count($data);$i++) {
+            $employee[$data[$i]->userid] = $usercollection->combine([$data[$i]->userid,$data[$i]->name,$starttime,$endtime,$day]);
         }
         
         $weekday = ['日', '月', '火', '水', '木', '金', '土']; //曜日変換用
