@@ -11,6 +11,8 @@ use Carbon\Carbon;
 
 class timelineController extends Controller
 {
+
+    // ページ起動時
     public function index($checkyear,$checkmonth,$checkuserid)
     {   
         Carbon::useMonthsOverflow(false); //日付の加算方法を変更
@@ -20,18 +22,16 @@ class timelineController extends Controller
         $lastday = $checkdt->endOfMonth()->day; //末日の取得
         $date = array(); //日付データを入れる配列
 
-        // 1日分ずつ配列に日付データを入れる
+        // 1日分ずつ配列に該当月の日付データを入れる
         for($i = 1; $i <= $lastday; $i++){
             $dt = Carbon::create($checkdt->year,$checkdt->month,$i);
             array_push($date,$dt);
         }
 
-        // $test = DB::select('select * from employee');
-
-        // ユーザーIDとユーザー名の追加
-        $usercollection = collect(['userid','name','starttime','endtime','day','workingid']);
+        // 従業員IDと従業員名の取得
+        $usercollection = collect(['userid','name','starttime','endtime','day','workingid']); //コレクションの定義
         $employee = DB::select('select * from employee');//従業員のデータ
-
+        
         for($i = 0;$i < count($employee);$i++) {
             // 勤務時間をユーザーごとに取得
             $working = DB::select('select * from working where year='.$checkdt->year.' and month='.$checkdt->month.' and userid='.$employee[$i]->userid);
@@ -40,7 +40,7 @@ class timelineController extends Controller
             $workingid = array_column($working, 'id');
             $day = array_column($working, 'day'); //勤務日
 
-            // データをユーザーごとにコレクションに格納
+            // 勤務時間をユーザーごとにコレクションに格納
             $data[$employee[$i]->userid] = $usercollection->combine([$employee[$i]->userid,$employee[$i]->name,$starttime,$endtime,$day,$workingid]);
         }
         
@@ -48,6 +48,8 @@ class timelineController extends Controller
   
         return view('timeline.index',compact('data','lastday','date','weekday','checkdt','checkuserid','working'));
     }
+
+    
     public function add(Request $request)
 	{   
         $requestdata = $request::all();
