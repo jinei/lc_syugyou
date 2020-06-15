@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('timeline/{checkyear}/{checkmonth}/{checkuserid}','timelineController@index');
-Route::post('timeline/{checkyear}/{checkmonth}/{checkuserid}','timelineController@databaseoperation');
+Route::post('timeline/{checkyear}/{checkmonth}/{checkuserid}','timelineController@database');
 Route::get('login','LoginController@index');
 Route::post('login','AuthController@login');
 Route::post('logout','AuthController@logout');

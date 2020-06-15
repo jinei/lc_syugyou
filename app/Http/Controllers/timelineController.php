@@ -28,7 +28,7 @@ class timelineController extends Controller
     // ------------------- ページ起動時 --------------------
     //------------------------------------------------------/
 
-    
+
     //------------------------------------------------------/
     // ------------- 勤務情報・日付情報の取得 -------------
     //------------------------------------------------------/
@@ -73,7 +73,7 @@ class timelineController extends Controller
 
 
     // データベース操作（INPTU UPDATE DELETE)
-    public function databaseoperation(Request $request)
+    public function database(Request $request)
 	{   
         $requestdata = $request::all();
         
