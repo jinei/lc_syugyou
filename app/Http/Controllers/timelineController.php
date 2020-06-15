@@ -77,17 +77,24 @@ class timelineController extends Controller
     public function database(Request $request)
 	{   
         $requestdata = $request::all();
-        
+        $userid = $requestdata['userid'];
+        $start = $requestdata['start'];
+        $end = $requestdata['end'];
+        $year = $requestdata['year'];
+        $month = $requestdata['month'];
+        $day = $requestdata['day'];
+        $workingid = $requestdata['workingid'];
+
         if (Request::get('add')){
             // INSERT
             if($requestdata['workingid'] == "") {
-            DB::insert('insert into working(userid,starttime,endtime,year,month,day) values("'.$requestdata['userid'].'","'.$requestdata['start'].'","'.$requestdata['end'].'",'.$requestdata['year'].','.$requestdata['month'].','.$requestdata['day'].')');
+            DB::insert('insert into working(userid,starttime,endtime,year,month,day) values("'.$userid.'","'.$start.'","'.$end.'",'.$year.','.$month.','.$day.')');
             // UPDATE
             } else {
-            DB::update('update working set starttime = "'.$requestdata['start'].'",endtime = "'.$requestdata['end'].'" where id = '.$requestdata['workingid']);
+            DB::update('update working set starttime = "'.$start.'",endtime = "'.$end.'" where id = '.$workingid);
             }
         } elseif (Request::get('delete')){
-            DB::delete('delete from working where id = '.$requestdata['workingid']);
+            DB::delete('delete from working where id = '.$workingid);
         }
 	    return redirect($_SERVER['REQUEST_URI']);
     }
