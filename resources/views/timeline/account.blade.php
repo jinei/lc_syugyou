@@ -44,10 +44,12 @@
   <!--               ナビバー END                    -->
   <!--------------------------------------------------->
 
+
+  <!--------------------------------------------------->
+  <!--              TABLE 従業員一覧 START           -->
+  <!--------------------------------------------------->
   <main>
-   
-</main>
-<table class="table table">
+   <table class="table table">
   <thead>
     <tr>
       <th>名前</th>
@@ -69,16 +71,18 @@
     @endforeach
   </tbody>
 </table>
+</main>
+  <!--------------------------------------------------->
+  <!--              TABLE 従業員一覧 END             -->
+  <!--------------------------------------------------->
 
-  <!--------------------------------------------------->
-  <!--              TABLE 各従業員の勤務 END         -->
-  <!--------------------------------------------------->
+  <!-- addbutton -->
 <button type="button" class="btn btn-success center-block" style="width:20vw;margin-top:10vh;" data-toggle="modal" data-target="#myModal">追加</button>
 
   <!--------------------------------------------------->
   <!--                  MODAL START                  -->
   <!--------------------------------------------------->
-  <form name="form" action="create" method="post" onsubmit="return check();">
+  <form name="form" action="create" method="post" onsubmit="return addCheck();">
   @csrf 
         <div id="myModal" class="modal fade" role="dialog">
           <div class="modal-dialog">
@@ -104,14 +108,14 @@
     </div>
   </div>
   </form>
-
   <!--------------------------------------------------->
   <!--                  MODAL END                    -->
   <!--------------------------------------------------->
 
 <script>
-  function check() {
 
+  function addCheck() {
+    // 入力値の取得
     const email = document.getElementById("email").value;
     const pw = document.getElementById("pw").value;
     const name = document.getElementById("name").value;
