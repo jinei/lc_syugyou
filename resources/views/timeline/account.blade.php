@@ -69,6 +69,7 @@
   <!--------------------------------------------------->
   <!--              TABLE 各従業員の勤務 END         -->
   <!--------------------------------------------------->
+<button type="button" class="btn btn-success center-block" style="width:20vw;margin-top:10vh;">追加</button>
 
 </body>
 

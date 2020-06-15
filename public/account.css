@@ -3,12 +3,13 @@
   width: 90vw;
   margin:auto;
 }
-
 td {
-    cursor: pointer;
     height: 7vh;
     width: 10vw;
     vertical-align: middle;
+}
+button {
+  margin:auto;
 }
 
 @media (max-width: 599px) {
