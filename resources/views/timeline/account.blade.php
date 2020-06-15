@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <link href="{{ asset('style.css') }}" rel="stylesheet">
+  <link href="{{ asset('account.css') }}" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>  
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
@@ -47,6 +47,25 @@
   <main>
    
 </main>
+<table class="table table">
+  <thead>
+    <tr>
+      <th>名前</th>
+      <th>Email</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    @foreach ($data as $dataitem)
+    <tr>
+      <td>{{$dataitem['name']}}</td>
+      <td>{{$dataitem['email']}}</td>
+      <td><button type="submit" class="btn btn-danger">削除</button></td>
+    </tr>
+    @endforeach
+  </tbody>
+</table>
+
   <!--------------------------------------------------->
   <!--              TABLE 各従業員の勤務 END         -->
   <!--------------------------------------------------->

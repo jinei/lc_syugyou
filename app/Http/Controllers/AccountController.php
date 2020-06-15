@@ -2,11 +2,38 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Request;
+use Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Collection;
 
 class AccountController extends Controller
 {
+
+    //------------------------------------------------------/
+    // ------------------- ページ起動時 --------------------
+    //------------------------------------------------------/
     public function index() {
-        return view('timeline.account');
+          // ログイン済
+        if (Auth::check()) {
+        $usercollection = collect(['id','name','email']); //コレクションの定義
+        $employee = DB::select('select * from users');//従業員のデータ
+        for($i = 0;$i < count($employee);$i++) {
+            $data[$i] = $usercollection->combine([$employee[$i]->id,$employee[$i]->name,$employee[$i]->email]);
+        }
+        return view('timeline.account',compact('data'));
+        } else {
+        return redirect('login');
+        }
+    }
+    //------------------------------------------------------/
+    // ------------------- ページ起動時 --------------------
+    //------------------------------------------------------/
+
+    //------------------------------------------------------/
+    // --------------- アカウント情報の取得 ----------------
+    //------------------------------------------------------/
+    public function getdata() {
+
     }
 }
