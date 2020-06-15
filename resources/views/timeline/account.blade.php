@@ -69,7 +69,41 @@
   <!--------------------------------------------------->
   <!--              TABLE 各従業員の勤務 END         -->
   <!--------------------------------------------------->
-<button type="button" class="btn btn-success center-block" style="width:20vw;margin-top:10vh;">追加</button>
+<button type="button" class="btn btn-success center-block" style="width:20vw;margin-top:10vh;" data-toggle="modal" data-target="#myModal">追加</button>
+
+  <!--------------------------------------------------->
+  <!--                  MODAL START                  -->
+  <!--------------------------------------------------->
+  <form name="form" action="create" method="post" onsubmit="return check();">
+  @csrf 
+        <div id="myModal" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+          <div class="modal-content">
+
+          <!-- header -->
+          <div class="modal-header">
+            <h4>従業員追加</h4>
+          </div>
+
+          <!-- body -->
+          <div class="modal-body">
+            <p>Email：<input type="text" class=" form-control" id="email" name="email"></p>
+            <p>Password：<input type="text" class=" form-control" id="pw" name="pw"></p>
+            <p>名前：<input type="text" class=" form-control" id="name" name="name"></p>
+            
+          <!-- footer -->
+          <div class="modal-footer">
+            <input type="submit" class="btn btn-default btn-primary" value="決定" name="add">
+          </div>
+
+      </div>
+    </div>
+  </div>
+  </form>
+
+  <!--------------------------------------------------->
+  <!--                  MODAL END                    -->
+  <!--------------------------------------------------->
 
 </body>
 

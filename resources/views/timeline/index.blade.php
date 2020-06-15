@@ -151,10 +151,10 @@
             @foreach ($date as $dateitem)
             <!-- その日付に出勤情報があれば出勤時間と退勤時間を出力 -->
             @if ( in_array($dateitem -> day, $empitem['day']))
-            <td data-toggle="modal" data-target="#myModal" data-user="{{$empitem['userid']}}" data-day="{{$dateitem}}" data-start="{{$empitem['starttime'][array_search($dateitem -> day, $empitem['day'])]}}" data-end="{{$empitem['endtime'][array_search($dateitem -> day, $empitem['day'])]}}" data-id="{{$empitem['workingid'][array_search($dateitem -> day, $empitem['day'])]}}">
+            <td data-toggle="modal" data-target="#addModal" data-user="{{$empitem['userid']}}" data-day="{{$dateitem}}" data-start="{{$empitem['starttime'][array_search($dateitem -> day, $empitem['day'])]}}" data-end="{{$empitem['endtime'][array_search($dateitem -> day, $empitem['day'])]}}" data-id="{{$empitem['workingid'][array_search($dateitem -> day, $empitem['day'])]}}">
             {{$empitem['starttime'][array_search($dateitem -> day, $empitem['day'])]}}<br>{{$empitem['endtime'][array_search($dateitem -> day, $empitem['day'])]}}</td>
             @else
-            <td data-toggle="modal" data-target="#myModal" data-user="{{$empitem['userid']}}" data-day="{{$dateitem}}" data-start="" data-end=""> -</td>
+            <td data-toggle="modal" data-target="#addModal" data-user="{{$empitem['userid']}}" data-day="{{$dateitem}}" data-start="" data-end=""> -</td>
             @endif
             @endforeach
             <td>{{$empitem['name']}}</td>
@@ -175,7 +175,7 @@
   <!--------------------------------------------------->
   <form name="form" action="" method="post" onsubmit="return check();">
   @csrf 
-        <div id="myModal" class="modal fade" role="dialog">
+        <div id="addModal" class="modal fade" role="dialog">
           <div class="modal-dialog">
           <div class="modal-content">
 
@@ -261,7 +261,7 @@ function check() {
 }
 
 // モーダル表示時
-$('#myModal').on('show.bs.modal', function (event) {
+$('#addModal').on('show.bs.modal', function (event) {
 
     // クリックした箇所の情報を取得
     let data =@json($data);
