@@ -20,7 +20,7 @@ class timelineController extends Controller
         if (Auth::check()) {
         return $this->getData($checkyear,$checkmonth,$checkuserid);
         } else {
-        return redirect('login');
+        return redirect('');
         }
     }
     //------------------------------------------------------/

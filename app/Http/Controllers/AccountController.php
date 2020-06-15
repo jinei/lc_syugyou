@@ -26,7 +26,7 @@ class AccountController extends Controller
 
         // 未ログイン
         } else {
-        return redirect('login');
+        return redirect('');
         }
     }
     //------------------------------------------------------/

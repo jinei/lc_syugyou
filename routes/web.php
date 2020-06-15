@@ -16,8 +16,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('timeline/{checkyear}/{checkmonth}/{checkuserid}','timelineController@index'); //勤務表 初期表示
 Route::post('timeline/{checkyear}/{checkmonth}/{checkuserid}','timelineController@database'); //勤務表 db操作
 
-Route::get('login','LoginController@index'); //ログイン画面 初期表示
-Route::post('login','AuthController@login'); //ログイン画面 ログイン機能
+Route::get('','LoginController@index'); //ログイン画面 初期表示
+Route::post('','AuthController@login'); //ログイン画面 ログイン機能
 Route::get('account','AccountController@index'); //アカウント作成画面 初期表示
 Route::post('create','AuthController@create'); //アカウント作成画面 作成機能
 Route::post('delete','AuthController@delete'); //アカウント作成画面 削除機能
