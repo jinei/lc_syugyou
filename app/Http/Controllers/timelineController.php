@@ -72,7 +72,9 @@ class timelineController extends Controller
     //------------------------------------------------------/
 
 
-    // データベース操作（INPTU UPDATE DELETE)
+    //------------------------------------------------------/
+    // ------ データベース操作(INSERT UPDATE DELETE) ------
+    //------------------------------------------------------/
     public function database(Request $request)
 	{   
         $requestdata = $request::all();
@@ -88,8 +90,9 @@ class timelineController extends Controller
         } elseif (Request::get('delete')){
             DB::delete('delete from working where id = '.$requestdata['workingid']);
         }
-      
 	    return redirect($_SERVER['REQUEST_URI']);
     }
-    
+    //------------------------------------------------------/
+    // ------ データベース操作(INSERT UPDATE DELETE) ------
+    //------------------------------------------------------/
 }
