@@ -40,4 +40,11 @@ class AuthController extends Controller
         DB::insert('insert into users(name,email,password) values("'.$name.'","'.$email.'","'.Hash::make($pw).'")');
         return redirect('account'); 
     }
+
+    public function delete(Request $request) {
+        $requestdata = $request::all();
+        $id = $requestdata['id'];
+        DB::delete('delete from users where id = '.$id);
+        return redirect('account');
+    }
 }

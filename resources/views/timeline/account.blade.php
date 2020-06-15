@@ -60,7 +60,11 @@
     <tr>
       <td>{{$dataitem['name']}}</td>
       <td>{{$dataitem['email']}}</td>
+      <form action="delete" method="post">
+      @csrf
+      <input type="hidden" name="id" value="{{$dataitem['id']}}">
       <td><button type="submit" class="btn btn-danger">削除</button></td>
+      </form>
     </tr>
     @endforeach
   </tbody>
@@ -107,9 +111,12 @@
 
 <script>
   function check() {
+
     const email = document.getElementById("email").value;
     const pw = document.getElementById("pw").value;
     const name = document.getElementById("name").value;
+    
+    //nullチェック
     if(email != "" && pw != "" && name != "") {
       return true;
     } else {

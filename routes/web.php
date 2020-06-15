@@ -23,5 +23,6 @@ Route::post('timeline/{checkyear}/{checkmonth}/{checkuserid}','timelineControlle
 Route::get('login','LoginController@index');
 Route::post('login','AuthController@login');
 Route::post('create','AuthController@create');
+Route::post('delete','AuthController@delete');
 Route::post('logout','AuthController@logout');
 Route::get('account','AccountController@index');
