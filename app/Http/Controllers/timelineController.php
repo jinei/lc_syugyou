@@ -12,11 +12,28 @@ use Auth;
 class timelineController extends Controller
 {
 
-    // ページ起動時
+    //------------------------------------------------------/
+    // ------------------- ページ起動時 --------------------
+    //------------------------------------------------------/
     public function index($checkyear,$checkmonth,$checkuserid)
     {   
         // ログイン済
         if (Auth::check()) {
+        return $this->getData($checkyear,$checkmonth,$checkuserid);
+        } else {
+        return redirect('login');
+        }
+    }
+    //------------------------------------------------------/
+    // ------------------- ページ起動時 --------------------
+    //------------------------------------------------------/
+
+    
+    //------------------------------------------------------/
+    // ------------- 勤務情報・日付情報の取得 -------------
+    //------------------------------------------------------/
+    public function getData($checkyear,$checkmonth,$checkuserid)
+    {
         Carbon::useMonthsOverflow(false); //日付の加算方法を変更
 
         // 日付データ取得
@@ -49,11 +66,13 @@ class timelineController extends Controller
         $weekday = ['日', '月', '火', '水', '木', '金', '土']; //曜日変換用
   
         return view('timeline.index',compact('data','lastday','date','weekday','checkdt','checkuserid','working'));
-    } else {
-        return redirect('login');
     }
-    }
+    //------------------------------------------------------/
+    // ------------- 勤務情報・日付情報の取得 -------------
+    //------------------------------------------------------/
 
+
+    // データベース操作（INPTU UPDATE DELETE)
     public function databaseoperation(Request $request)
 	{   
         $requestdata = $request::all();
