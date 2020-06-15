@@ -26,10 +26,16 @@
         <a class="navbar-brand">ホルトガーデン</a>
       </div>
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">勤務表</a></li>
+        <li class="active"><a>勤務表</a></li>
       </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+      <ul class="nav navbar-nav">
+        <li><a href="#">従業員管理</a></li>
+      </ul>
+      <form method="post" name="logoutform" action="../../../../logout">
+        <ul class="nav navbar-nav navbar-right">
+          @csrf
+          <li><a href="javascript:logoutform.submit()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+      </form>
       </ul>
     </div>
   </nav>
