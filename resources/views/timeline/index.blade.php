@@ -29,7 +29,7 @@
         <li class="active"><a>勤務表</a></li>
       </ul>
       <ul class="nav navbar-nav">
-        <li><a href="#">従業員管理</a></li>
+        <li><a href="/account">従業員管理</a></li>
       </ul>
       <form method="post" name="logoutform" action="../../../../logout">
         <ul class="nav navbar-nav navbar-right">
