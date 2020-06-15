@@ -88,7 +88,7 @@
           <!-- body -->
           <div class="modal-body">
             <p>Email：<input type="text" class=" form-control" id="email" name="email"></p>
-            <p>Password：<input type="text" class=" form-control" id="pw" name="pw"></p>
+            <p>Password：<input type="password" class=" form-control" id="pw" name="pw"></p>
             <p>名前：<input type="text" class=" form-control" id="name" name="name"></p>
             
           <!-- footer -->
@@ -105,6 +105,22 @@
   <!--                  MODAL END                    -->
   <!--------------------------------------------------->
 
+<script>
+  function check() {
+    const email = document.getElementById("email").value;
+    const pw = document.getElementById("pw").value;
+    const name = document.getElementById("name").value;
+    if(email != "" && pw != "" && name != "") {
+      return true;
+    } else {
+    Swal.fire({
+      icon: 'error',
+      title: '未入力の箇所があります',
+    })
+      return false;
+    }
+  }
+</script>
 </body>
 
 </html>
