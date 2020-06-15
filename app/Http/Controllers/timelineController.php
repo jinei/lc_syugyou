@@ -7,7 +7,7 @@ use Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
-
+use Auth;
 
 class timelineController extends Controller
 {
@@ -15,6 +15,8 @@ class timelineController extends Controller
     // ページ起動時
     public function index($checkyear,$checkmonth,$checkuserid)
     {   
+        // ログイン済
+        if (Auth::check()) {
         Carbon::useMonthsOverflow(false); //日付の加算方法を変更
 
         // 日付データ取得
@@ -47,6 +49,9 @@ class timelineController extends Controller
         $weekday = ['日', '月', '火', '水', '木', '金', '土']; //曜日変換用
   
         return view('timeline.index',compact('data','lastday','date','weekday','checkdt','checkuserid','working'));
+    } else {
+        return redirect('login');
+    }
     }
 
     public function databaseoperation(Request $request)
