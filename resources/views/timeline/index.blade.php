@@ -202,7 +202,7 @@
 
           <!-- footer -->
           <div class="modal-footer">
-            <input type="submit" class="btn btn-default btn-success" value="決定" name="add" onclick="form.key.value='add'">
+            <input type="submit" class="btn btn-default btn-success" value="作成" name="add" onclick="form.key.value='add'">
           </div>
 
       </div>
