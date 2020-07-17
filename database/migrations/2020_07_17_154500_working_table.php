@@ -13,7 +13,7 @@ class WorkingTable extends Migration
      */
     public function up()
     {
-        Schema::create('working', function (Blueprint $table) {
+        Schema::create('workings', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('userid');
             $table->string('starttime');
