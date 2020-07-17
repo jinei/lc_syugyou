@@ -24,7 +24,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('account','AccountController@index'); //アカウント作成画面 初期表示
     Route::post('create','AuthController@create'); //アカウント作成画面 作成機能
     Route::post('delete','AuthController@delete'); //アカウント作成画面 削除機能
-    Route::post('logout','AuthController@logout'); //ログアウト機能
     Route::post('timeline','timelineController@timeline_update')->name('timeline');
 });
 

@@ -33,12 +33,13 @@
                 <li><a href="/account">従業員管理</a></li>
             </ul>
 
-            <form method="post" name="logoutform" action="../../../../logout">
-                @csrf
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="javascript:logoutform.submit()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
-                </ul>
-            </form>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="{{ route('logout') }}"onclick="event.preventDefault();document.getElementById('logout-form').submit();"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+
+            </ul>
         </div>
     </nav>
 </header>
@@ -54,7 +55,7 @@
             <!-- 日付選択 -->
             <label for="sel1">年月:</label>
             <select class="form-control" onChange="submit(this.form)" name="date">
-            
+
                 <!-- 選択中の日付より前の日付 -->
                 @for ($i = 10;$i > 0;$i--)
                     <option value="{{$checkdt -> copy() -> subMonth($i) -> year}}/{{$checkdt -> copy() -> subMonth($i) -> month}}">
