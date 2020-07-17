@@ -11,22 +11,25 @@ use Auth;
 class timelineController extends Controller
 {
 
-    //------------------------------------------------------/
-    // ------------------- ページ起動時 --------------------
-    //------------------------------------------------------/
-    public function index($checkyear,$checkmonth,$checkuserid)
+    // ページ起動時
+    public function index()
     {   
-        // ログイン済
-        if (Auth::check()) {
+        $dt = Carbon::now();
+        $checkyear = $dt->year;
+        $checkmonth = $dt->month;
+        $checkuserid = 0;
         return $this->getData($checkyear,$checkmonth,$checkuserid);
-        } else {
-        return redirect('');
-        }
     }
-    //------------------------------------------------------/
-    // ------------------- ページ起動時 --------------------
-    //------------------------------------------------------/
-
+    
+    // 日付・選択ユーザーの切り替え
+    public function timeline_update(Request $request)
+    {
+        $param = $request::all();
+        $param_date = $param['date'];
+        $param_date = explode("/", $param_date);
+        $param_user = $param['user'];
+        return $this->getData($param_date[0],$param_date[1],$param_user);
+    }
 
     //------------------------------------------------------/
     // ------------- 勤務情報・日付情報の取得 -------------
@@ -40,7 +43,7 @@ class timelineController extends Controller
         $lastday = $checkdt->endOfMonth()->day; //末日の取得
         $date = array(); //日付データを入れる配列
 
-        // 1日分ずつ配列に該当月の日付データを入れる
+        // 日付取得
         for($i = 1; $i <= $lastday; $i++){
             $dt = Carbon::create($checkdt->year,$checkdt->month,$i);
             array_push($date,$dt);
@@ -101,4 +104,6 @@ class timelineController extends Controller
     //------------------------------------------------------/
     // ------ データベース操作(INSERT UPDATE DELETE) ------
     //------------------------------------------------------/
+
+
 }

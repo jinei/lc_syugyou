@@ -48,47 +48,53 @@
 
     <div class="selectctrl">
     
+        <form action="{{ route('timeline') }}" method="post" style="display:inline;">
+            @csrf
 
-        <label for="sel1">年月:</label>
-        <select class="form-control" onChange="location.href=value;">
-            <!-- 選択中の日付より前の日付 -->
-            @for ($i = 10;$i > 0;$i--)
-                <option value="../../{{$checkdt -> copy() -> subMonth($i) -> year}}/{{$checkdt -> copy() -> subMonth($i) -> month}}/{{$checkuserid}}">
-                {{$checkdt -> copy() -> subMonth($i) -> year}}/{{$checkdt -> copy() -> subMonth($i) -> month}}
+            <!-- 日付選択 -->
+            <label for="sel1">年月:</label>
+            <select class="form-control" onChange="submit(this.form)" name="date">
+            
+                <!-- 選択中の日付より前の日付 -->
+                @for ($i = 10;$i > 0;$i--)
+                    <option value="{{$checkdt -> copy() -> subMonth($i) -> year}}/{{$checkdt -> copy() -> subMonth($i) -> month}}">
+                    {{$checkdt -> copy() -> subMonth($i) -> year}}/{{$checkdt -> copy() -> subMonth($i) -> month}}
+                    </option>
+                @endfor
+
+                <!-- 選択中の日付-->
+                <option selected>{{$checkdt -> year}}/{{$checkdt -> month}}
+
+                <!-- 選択中の日付より後の日付 -->
+                @for ($i = 1;$i <= 10;$i++)
+                <option value="{{$checkdt -> copy() -> addMonth($i) -> year}}/{{$checkdt -> copy() -> addMonth($i) -> month}}">
+                {{$checkdt -> copy() -> addMonth($i) -> year}}/{{$checkdt -> copy() -> addMonth($i) -> month}}
                 </option>
-            @endfor
+                @endfor
 
-            <!-- 選択中の日付-->
-            <option selected>{{$checkdt -> year}}/{{$checkdt -> month}}
+            </select>
 
-            <!-- 選択中の日付より後の日付 -->
-            @for ($i = 1;$i <= 10;$i++)
-            <option value="../../{{$checkdt -> copy() -> addMonth($i) -> year}}/{{$checkdt -> copy() -> addMonth($i) -> month}}/{{$checkuserid}}">
-            {{$checkdt -> copy() -> addMonth($i) -> year}}/{{$checkdt -> copy() -> addMonth($i) -> month}}
-            </option>
-            @endfor
-        </select>
+            
+            <!-- ユーザー選択 -->
+            <label for="sel1">ユーザー:</label>
+            <select class="form-control" onChange="submit(this.form)" name="user">
 
-
-        <label for="sel1">ユーザー:</label>
-        <select class="form-control" onChange="location.href=value;">
-
-            <!-- ユーザーを全選択 -->
-            @if($checkuserid == 0)
-                <option selected>全て</option>
-            @else
-                <option value="./0">全て</option>
-            @endif
-
-            <!-- ユーザー選択 -->
-            @foreach ($data as $item)
-                @if ($checkuserid == $item['userid'])
-                    <option selected>{{$item['name']}}</option>
+                @if($checkuserid == 0)
+                    <option selected>全て</option>
                 @else
-                    <option value="./{{$item['userid']}}">{{$item['name']}}</option>
+                    <option value="0">全て</option>
                 @endif
-            @endforeach
-        </select>
+
+                @foreach ($data as $item)
+                    @if ($checkuserid == $item['userid'])
+                        <option selected>{{$item['name']}}</option>
+                    @else
+                        <option value="{{$item['userid']}}">{{$item['name']}}</option>
+                    @endif
+                @endforeach
+
+            </select>
+        </form>
 
     </div>
 
