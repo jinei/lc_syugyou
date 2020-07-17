@@ -157,7 +157,7 @@
 </main>
 
     <!-- MODAL START -->
-    <form name="form" action="" method="post" onsubmit="return check();">
+    <form name="form" action="{{ route('working_add') }}" method="post" onsubmit="return check();">
     @csrf 
         <div id="addModal" class="modal fade" role="dialog">
             <div class="modal-dialog">
