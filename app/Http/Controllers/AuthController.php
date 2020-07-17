@@ -5,32 +5,34 @@ namespace App\Http\Controllers;
 use Request;
 use Auth;
 use Carbon\Carbon;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-
-    public function logout() 
-    {
-        Auth::logout();
-        return redirect(''); 
-    }
-
     public function create(Request $request) {
         $requestdata = $request::all();
-        $name = $requestdata['name'];
-        $email = $requestdata['email'];
-        $pw = $requestdata['pw'];
-
-        DB::insert('insert into users(name,email,password) values("'.$name.'","'.$email.'","'.Hash::make($pw).'")');
+        
+        DB::transaction(function() use($requestdata) {
+            $users = new User;
+            $users->name = $requestdata['name'];
+            $users->email = $requestdata['email'];
+            $users->password = Hash::make($requestdata['pw']);
+            $users->save();
+        });
         return redirect('account'); 
     }
 
     public function delete(Request $request) {
         $requestdata = $request::all();
-        $id = $requestdata['id'];
-        DB::delete('delete from users where id = '.$id);
+        
+        DB::transaction(function() use($requestdata) {
+            $id = $requestdata['id'];
+            $users = User::find($id);
+            $users->deleted_at = Carbon::now();
+            $users->save();
+        });
         return redirect('account');
     }
        
