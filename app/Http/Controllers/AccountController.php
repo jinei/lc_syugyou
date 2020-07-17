@@ -6,31 +6,19 @@ use Request;
 use Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Collection;
+use App\Models\User;
 
 class AccountController extends Controller
 {
 
-    //------------------------------------------------------/
-    // ------------------- ページ起動時 --------------------
-    //------------------------------------------------------/
     public function index() {
-        // ログイン済
-        if (Auth::check()) {
-        // アカウント情報の取得
+
         $usercollection = collect(['id','name','email']); //コレクションの定義
-        $employee = DB::select('select * from users');//従業員のデータ
+        $employee = User::get();
         for($i = 0;$i < count($employee);$i++) {
             $data[$i] = $usercollection->combine([$employee[$i]->id,$employee[$i]->name,$employee[$i]->email]);
         }
         return view('timeline.account',compact('data'));
-
-        // 未ログイン
-        } else {
-        return redirect('');
-        }
     }
-    //------------------------------------------------------/
-    // ------------------- ページ起動時 --------------------
-    //------------------------------------------------------/
     
 }
