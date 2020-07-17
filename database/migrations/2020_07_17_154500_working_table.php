@@ -17,6 +17,7 @@ class WorkingTable extends Migration
             $table->increments('id');
             $table->integer('userid');
             $table->string('starttime');
+            $table->string('endtime');
             $table->integer('day');
             $table->integer('month');
             $table->integer('year');
