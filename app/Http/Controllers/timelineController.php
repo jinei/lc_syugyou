@@ -84,17 +84,24 @@ class timelineController extends Controller
         $workingid = $requestdata['workingid'];
 
         if (Request::get('add')){
-            // INSERT
-            if($requestdata['workingid'] == "") {
-            DB::insert('insert into working(userid,starttime,endtime,year,month,day) values("'.$userid.'","'.$start.'","'.$end.'",'.$year.','.$month.','.$day.')');
-            // UPDATE
-            } else {
-            DB::update('update working set starttime = "'.$start.'",endtime = "'.$end.'" where id = '.$workingid);
+
+            if($requestdata['workingid'] == "") {  // INSERT
+                $data = new Working;
+            } else {  // UPDATE
+                $data = Working::find($workingid);
             }
+            $data->userid = $userid;
+            $data->starttime = $start;
+            $data->endtime = $end;
+            $data->year = $year;
+            $data->month = $month;
+            $data->day = $day;
+            $data->save();
+
         } elseif (Request::get('delete')){
-            DB::delete('delete from working where id = '.$workingid);
+            Working::find($workingid)->delete();
         }
-	    return redirect($_SERVER['REQUEST_URI']);
+	    return redirect()->back();
     }
 
 }
