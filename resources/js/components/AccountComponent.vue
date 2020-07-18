@@ -51,10 +51,13 @@ export default {
       this.get_user();
     },
     delete_user: function(id) {
-      axios.post("/user_delete", {
-        id: id
-      });
-      this.get_user();
+      var result = window.confirm("削除しますか？");
+      if (result) {
+        axios.post("/user_delete", {
+          id: id
+        });
+        this.get_user();
+      }
     },
     get_user: function() {
       axios.get("/users_get").then(response => (this.users = response.data));

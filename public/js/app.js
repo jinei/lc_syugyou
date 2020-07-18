@@ -1960,10 +1960,14 @@ __webpack_require__.r(__webpack_exports__);
       this.get_user();
     },
     delete_user: function delete_user(id) {
-      axios.post("/user_delete", {
-        id: id
-      });
-      this.get_user();
+      var result = window.confirm("削除しますか？");
+
+      if (result) {
+        axios.post("/user_delete", {
+          id: id
+        });
+        this.get_user();
+      }
     },
     get_user: function get_user() {
       var _this = this;
