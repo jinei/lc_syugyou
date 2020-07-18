@@ -12,38 +12,10 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>アーネット太郎</td>
-          <td>taro@art-net.jp</td>
-          <td>
-            <button class="btn btn-primary">Show</button>
-          </td>
-          <td>
-            <button class="btn btn-success">Edit</button>
-          </td>
-          <td>
-            <button class="btn btn-danger">Delete</button>
-          </td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>アーネット花子</td>
-          <td>hanako@art-net.jp</td>
-          <td>
-            <button class="btn btn-primary">Show</button>
-          </td>
-          <td>
-            <button class="btn btn-success">Edit</button>
-          </td>
-          <td>
-            <button class="btn btn-danger">Delete</button>
-          </td>
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <td>ランチ太郎</td>
-          <td>taro@launch.com</td>
+        <tr v-for="(user,key) in users" :key="key">
+          <th scope="row">{{ user.id }}</th>
+          <td>{{ user.name }}</td>
+          <td>{{ user.email }}</td>
           <td>
             <button class="btn btn-primary">Show</button>
           </td>
@@ -60,5 +32,14 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      users: []
+    };
+  },
+  mounted() {
+    axios.get("/users_api").then(response => (this.users = response.data));
+  }
+};
 </script>

@@ -37,8 +37,16 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 
+/*
+|--------------------------------------------------------------------------
+| API
+|--------------------------------------------------------------------------
+*/
+Route::get('/users_api', "API\UserController@index");
 
 
 Route::get('/{any}', function() {
      return view('app');
 })->where('any', '.*');
+
+
