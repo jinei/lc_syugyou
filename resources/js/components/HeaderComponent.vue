@@ -7,14 +7,18 @@
         </div>
 
         <ul class="nav navbar-nav">
-          <li class="active">
-            <a>勤務表</a>
+          <li>
+            <router-link v-bind:to="{name: 'timeline.list'}">
+              <span>勤務表</span>
+            </router-link>
           </li>
         </ul>
 
         <ul class="nav navbar-nav">
           <li>
-            <a href="/account">従業員管理</a>
+            <router-link v-bind:to="{name: 'account.list'}">
+              <span>従業員管理</span>
+            </router-link>
           </li>
         </ul>
 
