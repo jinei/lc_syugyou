@@ -1,0 +1,61 @@
+<template>
+  <div style="text-align:center;">
+    <div class="form-group">
+      <label for="pwd">ID:</label>
+      <br />
+      <input type="number" class="form-control" id="id" v-model="users.id" readonly />
+    </div>
+
+    <div class="form-group">
+      <label for="usr">ユーザー名:</label>
+      <br />
+      <input type="text" class="form-control" id="usr" v-model="users.name" />
+    </div>
+
+    <div class="form-group">
+      <label for="usr">メールアドレス:</label>
+      <br />
+      <input type="text" class="form-control" id="usr" v-model="users.email" readonly />
+    </div>
+
+    <button
+      type="button"
+      class="btn btn-primary"
+      style="margin-top:2vh;width:10vw;"
+      @click="update_user"
+    >更新</button>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      users: []
+    };
+  },
+  mounted() {
+    this.get_user();
+  },
+  methods: {
+    get_user: function() {
+      axios
+        .get("/users_show", {
+          params: {
+            id: this.$route.params.value
+          }
+        })
+        .then(response => (this.users = response.data));
+    },
+    update_user: function() {
+      axios.post("/user_edit", {
+        id: this.users.id,
+        name: this.users.name,
+        emai: this.users.email
+      });
+      alert("succes");
+      this.$router.push("/account_list");
+    }
+  }
+};
+</script>

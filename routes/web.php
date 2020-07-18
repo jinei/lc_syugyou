@@ -45,6 +45,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/users_get', "API\UserController@index");
 Route::get('/users_show', "API\UserController@show");
 Route::post('/user_add', "API\UserController@add");
+Route::post('/user_edit', "API\UserController@update");
 Route::post('/user_delete', "API\UserController@delete");
 
 
