@@ -45,11 +45,9 @@ class UserController extends Controller
     // user 削除
     public function delete(Request $request)
     {
-        $test = $request->id;
         $users = User::find($request->id);
         $users->deleted_at = Carbon::now();
         $users->save();
-        return ['id' => $test];
     }
 
     /**

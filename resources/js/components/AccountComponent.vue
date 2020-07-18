@@ -22,7 +22,9 @@
             </router-link>
           </td>
           <td>
-            <button class="btn btn-success" @click="add_user">Edit</button>
+            <router-link v-bind:to="{name: 'account.edit',params: { value: user.id }}">
+              <button class="btn btn-success">Edit</button>
+            </router-link>
           </td>
           <td>
             <button class="btn btn-danger" @click="delete_user(user.id);">Delete</button>
@@ -49,13 +51,9 @@ export default {
       this.get_user();
     },
     delete_user: function(id) {
-      axios
-        .post("/user_delete", {
-          id: id
-        })
-        .then(res => {
-          console.log(res.data.id);
-        });
+      axios.post("/user_delete", {
+        id: id
+      });
       this.get_user();
     },
     get_user: function() {
