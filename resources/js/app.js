@@ -2,6 +2,7 @@ import VueRouter from 'vue-router';
 import HeaderComponent from "./components/HeaderComponent";
 import AccountComponent from "./components/AccountComponent";
 import timelineComponent from "./components/timelineComponent";
+import AccountShowComponent from "./components/AccountShowComponent";
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -41,6 +42,11 @@ const router = new VueRouter({
             path: '/timeline_list',
             name: 'timeline.list',
             component: timelineComponent
+        },
+        {
+            path: '/account_show/:value',
+            name: 'account.show',
+            component: AccountShowComponent
         },
     ]
 });

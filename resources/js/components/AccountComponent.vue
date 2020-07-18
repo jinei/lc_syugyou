@@ -17,7 +17,9 @@
           <th>{{ user.name }}</th>
           <th>{{ user.email }}</th>
           <td>
-            <button class="btn btn-primary">Show</button>
+            <router-link v-bind:to="{name: 'account.show',params: { value: user.id }}">
+              <button class="btn btn-primary">Show</button>
+            </router-link>
           </td>
           <td>
             <button class="btn btn-success" @click="add_user">Edit</button>
@@ -57,7 +59,7 @@ export default {
       this.get_user();
     },
     get_user: function() {
-      axios.get("/users_api").then(response => (this.users = response.data));
+      axios.get("/users_get").then(response => (this.users = response.data));
     }
   }
 };
