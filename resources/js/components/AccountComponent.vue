@@ -14,8 +14,8 @@
       <tbody>
         <tr v-for="(user,key) in users" :key="key">
           <th scope="row">{{ user.id }}</th>
-          <td>{{ user.name }}</td>
-          <td>{{ user.email }}</td>
+          <th>{{ user.name }}</th>
+          <th>{{ user.email }}</th>
           <td>
             <button class="btn btn-primary">Show</button>
           </td>

@@ -37608,9 +37608,9 @@ var render = function() {
           return _c("tr", { key: key }, [
             _c("th", { attrs: { scope: "row" } }, [_vm._v(_vm._s(user.id))]),
             _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(user.name))]),
+            _c("th", [_vm._v(_vm._s(user.name))]),
             _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(user.email))]),
+            _c("th", [_vm._v(_vm._s(user.email))]),
             _vm._v(" "),
             _vm._m(1, true),
             _vm._v(" "),
