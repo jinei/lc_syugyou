@@ -5,6 +5,8 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+use Carbon\Carbon;
 
 class UserController extends Controller
 {
@@ -25,9 +27,29 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
         //
+    }
+    
+    // user 追加
+    public function add()
+    {
+        $users = new User;
+        $users->name = 'test';
+        $users->email = 'tesr@test.com';
+        $users->password = Hash::make('testtest');
+        $users->save();
+    }
+
+    // user 削除
+    public function delete(Request $request)
+    {
+        $test = $request->id;
+        $users = User::find($request->id);
+        $users->deleted_at = Carbon::now();
+        $users->save();
+        return ['id' => $test];
     }
 
     /**

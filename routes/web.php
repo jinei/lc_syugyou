@@ -43,6 +43,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 |--------------------------------------------------------------------------
 */
 Route::get('/users_api', "API\UserController@index");
+Route::post('/user_add', "API\UserController@add");
+Route::post('/user_delete', "API\UserController@delete");
 
 
 Route::get('/{any}', function() {

@@ -20,10 +20,10 @@
             <button class="btn btn-primary">Show</button>
           </td>
           <td>
-            <button class="btn btn-success">Edit</button>
+            <button class="btn btn-success" @click="add_user">Edit</button>
           </td>
           <td>
-            <button class="btn btn-danger">Delete</button>
+            <button class="btn btn-danger" @click="delete_user(user.id);">Delete</button>
           </td>
         </tr>
       </tbody>
@@ -39,7 +39,26 @@ export default {
     };
   },
   mounted() {
-    axios.get("/users_api").then(response => (this.users = response.data));
+    this.get_user();
+  },
+  methods: {
+    add_user: function() {
+      axios.post("/user_add").then();
+      this.get_user();
+    },
+    delete_user: function(id) {
+      axios
+        .post("/user_delete", {
+          id: id
+        })
+        .then(res => {
+          console.log(res.data.id);
+        });
+      this.get_user();
+    },
+    get_user: function() {
+      axios.get("/users_api").then(response => (this.users = response.data));
+    }
   }
 };
 </script>

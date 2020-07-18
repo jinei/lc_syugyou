@@ -1948,11 +1948,28 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   mounted: function mounted() {
-    var _this = this;
+    this.get_user();
+  },
+  methods: {
+    add_user: function add_user() {
+      axios.post("/user_add").then();
+      this.get_user();
+    },
+    delete_user: function delete_user(id) {
+      axios.post("/user_delete", {
+        id: id
+      }).then(function (res) {
+        console.log(res.data.id);
+      });
+      this.get_user();
+    },
+    get_user: function get_user() {
+      var _this = this;
 
-    axios.get("/users_api").then(function (response) {
-      return _this.users = response.data;
-    });
+      axios.get("/users_api").then(function (response) {
+        return _this.users = response.data;
+      });
+    }
   }
 });
 
@@ -37614,9 +37631,28 @@ var render = function() {
             _vm._v(" "),
             _vm._m(1, true),
             _vm._v(" "),
-            _vm._m(2, true),
+            _c("td", [
+              _c(
+                "button",
+                { staticClass: "btn btn-success", on: { click: _vm.add_user } },
+                [_vm._v("Edit")]
+              )
+            ]),
             _vm._v(" "),
-            _vm._m(3, true)
+            _c("td", [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-danger",
+                  on: {
+                    click: function($event) {
+                      return _vm.delete_user(user.id)
+                    }
+                  }
+                },
+                [_vm._v("Delete")]
+              )
+            ])
           ])
         }),
         0
@@ -37651,22 +37687,6 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("td", [
       _c("button", { staticClass: "btn btn-primary" }, [_vm._v("Show")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", [
-      _c("button", { staticClass: "btn btn-success" }, [_vm._v("Edit")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", [
-      _c("button", { staticClass: "btn btn-danger" }, [_vm._v("Delete")])
     ])
   }
 ]
