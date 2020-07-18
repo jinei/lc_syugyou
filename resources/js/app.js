@@ -1,4 +1,6 @@
+import VueRouter from 'vue-router';
 import HeaderComponent from "./components/HeaderComponent";
+import AccountComponent from "./components/AccountComponent";
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -24,6 +26,18 @@ window.Vue = require('vue');
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('header-component', HeaderComponent);
 
+Vue.use(VueRouter);
+
+const router = new VueRouter({
+    mode: 'history',
+    routes: [
+        {
+            path: '/account_list',
+            name: 'account.list',
+            component: AccountComponent
+        },
+    ]
+});
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -32,4 +46,5 @@ Vue.component('header-component', HeaderComponent);
 
 const app = new Vue({
     el: '#app',
+    router
 });
