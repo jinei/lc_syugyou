@@ -2327,6 +2327,65 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -38596,50 +38655,64 @@ var render = function() {
                       _c("td", [_vm._v(_vm._s(user.name))]),
                       _vm._v(" "),
                       _vm._l(_vm.dates, function(date, index) {
-                        return _c("td", { key: date.id }, [
-                          _vm.workings
-                            .map(function(item) {
-                              return item.day
-                            })
-                            .includes(String(_vm.dates[index].day)) &&
-                          _vm.workings[
-                            _vm.workings
-                              .map(function(item) {
-                                return item.day
-                              })
-                              .indexOf(String(_vm.dates[index].day))
-                          ].userid == user.id
-                            ? _c("span", [
-                                _vm._v(
-                                  "\n              " +
-                                    _vm._s(
-                                      _vm.workings[
-                                        _vm.workings
-                                          .map(function(item) {
-                                            return item.day
-                                          })
-                                          .indexOf(String(_vm.dates[index].day))
-                                      ].starttime
-                                    ) +
-                                    "\n              "
-                                ),
-                                _c("br"),
-                                _vm._v(
-                                  "\n              " +
-                                    _vm._s(
-                                      _vm.workings[
-                                        _vm.workings
-                                          .map(function(item) {
-                                            return item.day
-                                          })
-                                          .indexOf(String(_vm.dates[index].day))
-                                      ].endtime
-                                    ) +
-                                    "\n            "
+                        return _c(
+                          "td",
+                          {
+                            key: date.id,
+                            attrs: {
+                              "data-toggle": "modal",
+                              "data-target": "#addModal"
+                            }
+                          },
+                          [
+                            _c("span", { staticStyle: { display: "none" } }, [
+                              _vm._v(
+                                _vm._s(
+                                  (_vm.tempArray = _vm.workings.map(function(
+                                    item
+                                  ) {
+                                    return item.day
+                                  }))
                                 )
-                              ])
-                            : _c("span", [_vm._v("-")])
-                        ])
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _vm.tempArray.includes(
+                              String(_vm.dates[index].day)
+                            ) &&
+                            _vm.workings[
+                              _vm.tempArray.indexOf(
+                                String(_vm.dates[index].day)
+                              )
+                            ].userid == user.id
+                              ? _c("span", [
+                                  _vm._v(
+                                    "\n              " +
+                                      _vm._s(
+                                        _vm.workings[
+                                          _vm.tempArray.indexOf(
+                                            String(_vm.dates[index].day)
+                                          )
+                                        ].starttime
+                                      ) +
+                                      "\n              "
+                                  ),
+                                  _c("br"),
+                                  _vm._v(
+                                    "\n              " +
+                                      _vm._s(
+                                        _vm.workings[
+                                          _vm.tempArray.indexOf(
+                                            String(_vm.dates[index].day)
+                                          )
+                                        ].endtime
+                                      ) +
+                                      "\n            "
+                                  )
+                                ])
+                              : _c("span", [_vm._v("-")])
+                          ]
+                        )
                       }),
                       _vm._v(" "),
                       _c("td", [_vm._v(_vm._s(user.name))])
@@ -38652,10 +38725,112 @@ var render = function() {
           )
         ]
       )
-    ])
+    ]),
+    _vm._v(" "),
+    _vm._m(0)
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "modal fade", attrs: { id: "addModal", role: "dialog" } },
+      [
+        _c("div", { staticClass: "modal-dialog" }, [
+          _c("div", { staticClass: "modal-content" }, [
+            _c("div", { staticClass: "modal-header" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "close",
+                  attrs: { type: "button", "data-dismiss": "modal" }
+                },
+                [_vm._v("×")]
+              ),
+              _vm._v(" "),
+              _c("h4", {
+                staticClass: "modal-title",
+                attrs: { id: "modal_name" }
+              }),
+              _vm._v(" "),
+              _c("h4", {
+                staticClass: "modal-subtitle",
+                attrs: { id: "modal_day" }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "modal-body" }, [
+              _c("input", {
+                attrs: { type: "hidden", id: "userid", name: "userid" }
+              }),
+              _vm._v(" "),
+              _c("input", {
+                attrs: { type: "hidden", id: "year", name: "year" }
+              }),
+              _vm._v(" "),
+              _c("input", {
+                attrs: { type: "hidden", id: "month", name: "month" }
+              }),
+              _vm._v(" "),
+              _c("input", {
+                attrs: { type: "hidden", id: "day", name: "day" }
+              }),
+              _vm._v(" "),
+              _c("input", {
+                attrs: { type: "hidden", id: "workingid", name: "workingid" }
+              }),
+              _vm._v(" "),
+              _c("input", {
+                attrs: { name: "key", type: "hidden", value: "" }
+              }),
+              _vm._v(" "),
+              _c("p", [
+                _vm._v("\n            出勤時間：\n            "),
+                _c("input", {
+                  staticClass: "form-control",
+                  attrs: { type: "time", id: "start", name: "start" }
+                })
+              ]),
+              _vm._v(" "),
+              _c("p", [
+                _vm._v("\n            退勤時間：\n            "),
+                _c("input", {
+                  staticClass: "form-control",
+                  attrs: { type: "time", id: "end", name: "end" }
+                })
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                staticClass: "btn btn-default btn-danger",
+                attrs: {
+                  type: "submit",
+                  value: "削除",
+                  name: "delete",
+                  onclick: "form.key.value='delete'"
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "modal-footer" }, [
+              _c("input", {
+                staticClass: "btn btn-default btn-success",
+                attrs: {
+                  type: "submit",
+                  value: "作成",
+                  name: "add",
+                  onclick: "form.key.value='add'"
+                }
+              })
+            ])
+          ])
+        ])
+      ]
+    )
+  }
+]
 render._withStripped = true
 
 
