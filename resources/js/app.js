@@ -5,6 +5,7 @@ import timelineComponent from "./components/timelineComponent";
 import AccountShowComponent from "./components/AccountShowComponent";
 import AccountEditComponent from "./components/AccountEditComponent";
 import AccountCreateComponent from "./components/AccountCreateComponent";
+import VModal from "vue-js-modal";
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -31,6 +32,7 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 Vue.component('header-component', HeaderComponent);
 
 Vue.use(VueRouter);
+Vue.use(VModal);
 
 const router = new VueRouter({
     mode: 'history',

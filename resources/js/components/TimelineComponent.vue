@@ -38,17 +38,13 @@
         <tbody>
           <tr v-for="user in users" :key="user.id" v-if="selectUser==0 || user.id==selectUser">
             <td>{{ user.name }}</td>
-            <td
-              v-for="(date,index) in dates"
-              :key="date.id"
-              data-toggle="modal"
-              data-target="#addModal"
-            >
+            <td v-for="(date,index) in dates" :key="date.id" @click="show(user,date.day)">
               <span style="display:none;">{{ tempArray = workings.map(item => item.day) }}</span>
 
               <span
                 v-if="tempArray.includes(String(dates[index].day)) && workings[tempArray.indexOf(String(dates[index].day))].userid == user.id"
               >
+                <input type="hidden" />
                 {{workings[tempArray.indexOf(String(dates[index].day))].starttime}}
                 <br />
                 {{workings[tempArray.indexOf(String(dates[index].day))].endtime}}
@@ -61,56 +57,53 @@
       </table>
     </div>
 
-    <!-- MODAL START -->
-    <div id="addModal" class="modal fade" role="dialog">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <!-- header -->
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title" id="modal_name"></h4>
-            <h4 class="modal-subtitle" id="modal_day"></h4>
-          </div>
-
-          <!-- body -->
-          <div class="modal-body">
-            <input type="hidden" id="userid" name="userid" />
-            <input type="hidden" id="year" name="year" />
-            <input type="hidden" id="month" name="month" />
-            <input type="hidden" id="day" name="day" />
-            <input type="hidden" id="workingid" name="workingid" />
-            <input name="key" type="hidden" value />
-            <p>
-              出勤時間：
-              <input type="time" class="form-control" id="start" name="start" />
-            </p>
-            <p>
-              退勤時間：
-              <input type="time" class="form-control" id="end" name="end" />
-            </p>
-            <input
-              type="submit"
-              class="btn btn-default btn-danger"
-              value="削除"
-              name="delete"
-              onclick="form.key.value='delete'"
-            />
-          </div>
-
-          <!-- footer -->
-          <div class="modal-footer">
-            <input
-              type="submit"
-              class="btn btn-default btn-success"
-              value="作成"
-              name="add"
-              onclick="form.key.value='add'"
-            />
-          </div>
-        </div>
+    <!-- modal -->
+    <modal name="add_plan" :draggable="true" :resizable="true">
+      <!-- header -->
+      <div class="modal-header">
+        <button type="button" class="close" @click="hide">&times;</button>
+        <h4 class="modal-title" id="modal_name">{{ modalDay }}</h4>
+        <h5 class="modal-subtitle" id="modal_day">
+          <strong>{{ modalUser }}</strong>
+        </h5>
       </div>
-    </div>
-    <!-- MODAL END -->
+
+      <!-- body -->
+      <div class="modal-body">
+        <input type="hidden" id="userid" name="userid" />
+        <input type="hidden" id="year" name="year" />
+        <input type="hidden" id="month" name="month" />
+        <input type="hidden" id="day" name="day" />
+        <input type="hidden" id="workingid" name="workingid" />
+        <input name="key" type="hidden" value />
+        <p>
+          出勤時間：
+          <input type="time" class="form-control" id="start" name="start" />
+        </p>
+        <p>
+          退勤時間：
+          <input type="time" class="form-control" id="end" name="end" />
+        </p>
+        <input
+          type="submit"
+          class="btn btn-default btn-danger"
+          value="削除"
+          name="delete"
+          onclick="form.key.value='delete'"
+        />
+      </div>
+
+      <!-- footer -->
+      <div class="modal-footer">
+        <input
+          type="submit"
+          class="btn btn-default btn-success"
+          value="作成"
+          name="add"
+          onclick="form.key.value='add'"
+        />
+      </div>
+    </modal>
   </div>
 </template>
 
@@ -121,7 +114,9 @@ export default {
       dates: [],
       users: [],
       workings: [],
-      selectUser: 0
+      selectUser: 0,
+      modalDay: "",
+      modalUser: ""
     };
   },
   mounted() {
@@ -154,6 +149,16 @@ export default {
             (this.workings = response.data), console.log(this.workings)
           )
         );
+    },
+    show: function(user, day) {
+      const year = this.dates[0].year;
+      const month = this.dates[0].month;
+      this.modalDay = year + "/" + month + "/" + day;
+      this.modalUser = user.name;
+      this.$modal.show("add_plan");
+    },
+    hide: function() {
+      this.$modal.hide("add_plan");
     }
   }
 };
