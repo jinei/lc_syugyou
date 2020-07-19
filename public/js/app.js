@@ -54279,7 +54279,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]({
     name: 'account.list',
     component: _components_Account_index__WEBPACK_IMPORTED_MODULE_2__["default"]
   }, {
-    path: '/timeline_list',
+    path: '/timeline',
     name: 'timeline.list',
     component: _components_Timeline_index__WEBPACK_IMPORTED_MODULE_3__["default"]
   }, {

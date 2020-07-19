@@ -43,7 +43,7 @@ const router = new VueRouter({
             component: AccountComponent
         },
         {
-            path: '/timeline_list',
+            path: '/timeline',
             name: 'timeline.list',
             component: timelineComponent
         },
