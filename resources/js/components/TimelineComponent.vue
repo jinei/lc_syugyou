@@ -2,14 +2,12 @@
   <div>
     <div class="selectctrl">
       <!-- 日付選択 -->
-      <label for="sel1">年月:</label>
-      <select class="form-control">
-        <option value>1月</option>
-        <option value>2月</option>
-      </select>
-
+      <div style="font-size:1.3em;margin-bottom:2vh;">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <strong>{{ dates[0].year }}/{{ dates[0].month }}</strong>
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+      </div>
       <!-- ユーザー選択 -->
-      <label for="sel1">ユーザー:</label>
       <select class="form-control" name="user">
         <option value>jinei</option>
       </select>
@@ -34,6 +32,7 @@
           </tr>
         </thead>
 
+        <!-- 勤怠情報 -->
         <tbody>
           <tr v-for="user in users" :key="user.id">
             <td>{{ user.name }}</td>
@@ -71,7 +70,7 @@ export default {
           )
         );
     },
-    getUser: function() {
+    getUser: function(date) {
       axios.get("/users_get").then(response => (this.users = response.data));
     }
   }

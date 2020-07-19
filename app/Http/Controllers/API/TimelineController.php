@@ -16,12 +16,13 @@ class TimelineController extends Controller
         $checkdt = Carbon::create($checkyear,$checkmonth);
         $lastday = $checkdt->endOfMonth()->day; //末日の取得
         $date = array(); //日付データを入れる配列
-        $datecollection = collect(['month','day','week']);
+        $datecollection = collect(['year','month','day','week']);
         $weekday = ['日', '月', '火', '水', '木', '金', '土']; //曜日変換用
 
         for($i = 1; $i <= $lastday; $i++){
             $dt = Carbon::create($checkdt->year,$checkdt->month,$i);
             array_push($date,$datecollection->combine([
+                $checkyear,
                 $checkmonth,
                 $i,
                 $weekday[$dt->dayOfWeek]

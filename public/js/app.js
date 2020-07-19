@@ -2320,7 +2320,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2340,7 +2339,7 @@ __webpack_require__.r(__webpack_exports__);
         return _this.dates = response.data.date, console.log(_this.dates);
       });
     },
-    getUser: function getUser() {
+    getUser: function getUser(date) {
       var _this2 = this;
 
       axios.get("/users_get").then(function (response) {
@@ -38451,7 +38450,29 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _vm._m(0),
+    _c("div", { staticClass: "selectctrl" }, [
+      _c(
+        "div",
+        { staticStyle: { "font-size": "1.3em", "margin-bottom": "2vh" } },
+        [
+          _c("span", {
+            staticClass: "glyphicon glyphicon-chevron-left",
+            attrs: { "aria-hidden": "true" }
+          }),
+          _vm._v(" "),
+          _c("strong", [
+            _vm._v(_vm._s(_vm.dates[0].year) + "/" + _vm._s(_vm.dates[0].month))
+          ]),
+          _vm._v(" "),
+          _c("span", {
+            staticClass: "glyphicon glyphicon-chevron-right",
+            attrs: { "aria-hidden": "true" }
+          })
+        ]
+      ),
+      _vm._v(" "),
+      _vm._m(0)
+    ]),
     _vm._v(" "),
     _c("div", { staticClass: "table" }, [
       _c(
@@ -38526,21 +38547,11 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "selectctrl" }, [
-      _c("label", { attrs: { for: "sel1" } }, [_vm._v("年月:")]),
-      _vm._v(" "),
-      _c("select", { staticClass: "form-control" }, [
-        _c("option", { attrs: { value: "" } }, [_vm._v("1月")]),
-        _vm._v(" "),
-        _c("option", { attrs: { value: "" } }, [_vm._v("2月")])
-      ]),
-      _vm._v(" "),
-      _c("label", { attrs: { for: "sel1" } }, [_vm._v("ユーザー:")]),
-      _vm._v(" "),
-      _c("select", { staticClass: "form-control", attrs: { name: "user" } }, [
-        _c("option", { attrs: { value: "" } }, [_vm._v("jinei")])
-      ])
-    ])
+    return _c(
+      "select",
+      { staticClass: "form-control", attrs: { name: "user" } },
+      [_c("option", { attrs: { value: "" } }, [_vm._v("jinei")])]
+    )
   }
 ]
 render._withStripped = true
