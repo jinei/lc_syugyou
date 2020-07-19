@@ -50,13 +50,12 @@ class TimelineController extends Controller
     
     public function addworking(Request $request)
     {
-        // if($request->id == null) { 
-        //     $workings = Working::new();
-        // } else {
-        //     $workings = Working::find($request->id);
-        // }
+        if($request->id == null) { 
+            $workings = new Working;
+        } else {
+            $workings = Working::find($request->id);
+        }
 
-        $workings = new Working;
         $workings->starttime = $request->starttime;
         $workings->endtime = $request->endtime;
         $workings->year = $request->year;
