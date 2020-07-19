@@ -65,9 +65,9 @@
       <!-- header -->
       <div class="modal-header">
         <button type="button" class="close" @click="hide">&times;</button>
-        <h4 class="modal-title" id="modal_name">{{ modalDay }}</h4>
+        <h4 class="modal-title" id="modal_name">{{ modalDate }}</h4>
         <h5 class="modal-subtitle" id="modal_day">
-          <strong>{{ modalUser }}</strong>
+          <strong>{{ modalUserName }}</strong>
         </h5>
       </div>
 
@@ -118,8 +118,11 @@ export default {
       users: [],
       workings: [],
       selectUser: 0,
-      modalDay: "",
-      modalUser: "",
+      modalWorkingId: null,
+      modalDate: "",
+      modalDay: null,
+      modalUserName: "",
+      modalUserId: null,
       modalStarttime: "",
       modalEndtime: ""
     };
@@ -154,25 +157,36 @@ export default {
     show: function(user, day, date) {
       const year = this.dates[0].year;
       const month = this.dates[0].month;
-
+      this.modalDay = day;
       if (date != undefined) {
         this.modalStarttime = date.starttime;
         this.modalEndtime = date.endtime;
+        this.modalWorkingId = date.id;
       } else {
         this.modalStarttime = "";
         this.modalEndtime = "";
+        this.modalWorkingId = null;
       }
-      this.modalDay = year + "/" + month + "/" + day;
-      this.modalUser = user.name;
+      this.modalDate = year + "/" + month + "/" + day;
+      this.modalUserId = user.id;
+      this.modalUserName = user.name;
       this.$modal.show("add_plan");
     },
     hide: function() {
       this.$modal.hide("add_plan");
     },
     addPlan: function() {
-      axios.post("/add_plan", {
-        name: "name"
-      });
+      axios
+        .post("/working_add", {
+          id: this.modalWorkingId,
+          starttime: this.modalStarttime,
+          endtime: this.modalEndtime,
+          day: this.modalDay,
+          userid: this.modalUserId,
+          month: this.dates[0].month,
+          year: this.dates[0].year
+        })
+        .then(this.getWorking(this.dates[0], this.hide()));
     }
   }
 };

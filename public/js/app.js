@@ -2421,8 +2421,11 @@ __webpack_require__.r(__webpack_exports__);
       users: [],
       workings: [],
       selectUser: 0,
-      modalDay: "",
-      modalUser: "",
+      modalWorkingId: null,
+      modalDate: "",
+      modalDay: null,
+      modalUserName: "",
+      modalUserId: null,
       modalStarttime: "",
       modalEndtime: ""
     };
@@ -2461,26 +2464,36 @@ __webpack_require__.r(__webpack_exports__);
     show: function show(user, day, date) {
       var year = this.dates[0].year;
       var month = this.dates[0].month;
+      this.modalDay = day;
 
       if (date != undefined) {
         this.modalStarttime = date.starttime;
         this.modalEndtime = date.endtime;
+        this.modalWorkingId = date.id;
       } else {
         this.modalStarttime = "";
         this.modalEndtime = "";
+        this.modalWorkingId = null;
       }
 
-      this.modalDay = year + "/" + month + "/" + day;
-      this.modalUser = user.name;
+      this.modalDate = year + "/" + month + "/" + day;
+      this.modalUserId = user.id;
+      this.modalUserName = user.name;
       this.$modal.show("add_plan");
     },
     hide: function hide() {
       this.$modal.hide("add_plan");
     },
     addPlan: function addPlan() {
-      axios.post("/add_plan", {
-        name: "name"
-      });
+      axios.post("/working_add", {
+        id: this.modalWorkingId,
+        starttime: this.modalStarttime,
+        endtime: this.modalEndtime,
+        day: this.modalDay,
+        userid: this.modalUserId,
+        month: this.dates[0].month,
+        year: this.dates[0].year
+      }).then(this.getWorking(this.dates[0], this.hide()));
     }
   }
 });
@@ -38924,13 +38937,13 @@ var render = function() {
             _c(
               "h4",
               { staticClass: "modal-title", attrs: { id: "modal_name" } },
-              [_vm._v(_vm._s(_vm.modalDay))]
+              [_vm._v(_vm._s(_vm.modalDate))]
             ),
             _vm._v(" "),
             _c(
               "h5",
               { staticClass: "modal-subtitle", attrs: { id: "modal_day" } },
-              [_c("strong", [_vm._v(_vm._s(_vm.modalUser))])]
+              [_c("strong", [_vm._v(_vm._s(_vm.modalUserName))])]
             )
           ]),
           _vm._v(" "),
