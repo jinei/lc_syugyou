@@ -2418,6 +2418,8 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       dates: [],
+      checkyear: null,
+      checkmonth: null,
       users: [],
       workings: [],
       selectUser: 0,
@@ -2442,7 +2444,7 @@ __webpack_require__.r(__webpack_exports__);
         flag: flag,
         now: this.dates[0]
       }).then(function (response) {
-        return _this.dates = response.data.date, _this.getWorking(_this.dates[0]);
+        return _this.dates = response.data.date, _this.getWorking(_this.dates[0], (_this.checkyear = _this.dates[0].year, _this.checkmonth = _this.dates[0].month));
       });
     },
     getUser: function getUser() {
@@ -38730,9 +38732,7 @@ var render = function() {
             }),
             _vm._v(" "),
             _c("strong", [
-              _vm._v(
-                _vm._s(_vm.dates[0].year) + "/" + _vm._s(_vm.dates[0].month)
-              )
+              _vm._v(_vm._s(_vm.checkyear) + "/" + _vm._s(_vm.checkmonth))
             ]),
             _vm._v(" "),
             _c("span", {
@@ -38820,7 +38820,7 @@ var render = function() {
               _c(
                 "tr",
                 [
-                  _c("th", [_vm._v(_vm._s(_vm.dates[0].month) + "月")]),
+                  _c("th", [_vm._v(_vm._s(_vm.checkmonth) + "月")]),
                   _vm._v(" "),
                   _vm._l(_vm.dates, function(date) {
                     return _c("th", { key: date.id }, [
@@ -38828,7 +38828,7 @@ var render = function() {
                     ])
                   }),
                   _vm._v(" "),
-                  _c("th", [_vm._v(_vm._s(_vm.dates[0].month) + "月")])
+                  _c("th", [_vm._v(_vm._s(_vm.checkmonth) + "月")])
                 ],
                 2
               )

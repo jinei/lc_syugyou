@@ -4,7 +4,7 @@
       <!-- 日付指定 -->
       <div style="font-size:1.3em;margin-bottom:2vh;">
         <span class="glyphicon glyphicon-chevron-left" aria-hidden="true" @click="getDate(-1)"></span>
-        <strong>{{ dates[0].year }}/{{ dates[0].month }}</strong>
+        <strong>{{ checkyear }}/{{ checkmonth }}</strong>
         <span class="glyphicon glyphicon-chevron-right" aria-hidden="true" @click="getDate(1)"></span>
       </div>
 
@@ -28,9 +28,9 @@
 
           <!-- 日付 -->
           <tr>
-            <th>{{ dates[0].month }}月</th>
+            <th>{{ checkmonth }}月</th>
             <th v-for="date in dates" :key="date.id">{{date.day}}</th>
-            <th>{{ dates[0].month }}月</th>
+            <th>{{ checkmonth }}月</th>
           </tr>
         </thead>
 
@@ -115,6 +115,8 @@ export default {
   data() {
     return {
       dates: [],
+      checkyear: null,
+      checkmonth: null,
       users: [],
       workings: [],
       selectUser: 0,
@@ -140,7 +142,12 @@ export default {
         })
         .then(
           response => (
-            (this.dates = response.data.date), this.getWorking(this.dates[0])
+            (this.dates = response.data.date),
+            this.getWorking(
+              this.dates[0],
+              ((this.checkyear = this.dates[0].year),
+              (this.checkmonth = this.dates[0].month))
+            )
           )
         );
     },
