@@ -24,7 +24,7 @@
 
         <ul class="nav navbar-nav navbar-right">
           <li>
-            <a>
+            <a href @click="logout()">
               <span class="glyphicon glyphicon-log-out"></span> Logout
             </a>
           </li>
@@ -35,5 +35,11 @@
 </template>
  
  <script>
-export default {};
+export default {
+  methods: {
+    logout: function() {
+      axios.post("/logout");
+    }
+  }
+};
 </script>

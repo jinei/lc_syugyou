@@ -32,6 +32,11 @@
         </tr>
       </tbody>
     </table>
+    <router-link v-bind:to="{name: 'account.create'}">
+      <button type="button" class="btn btn-warning">
+        <span class="glyphicon glyphicon-user"></span>追加
+      </button>
+    </router-link>
   </div>
 </template>
 

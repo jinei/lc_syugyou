@@ -27,19 +27,19 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store()
-    {
-        //
-    }
-    
-    // user 追加
-    public function add()
+    public function store(Request $request)
     {
         $users = new User;
-        $users->name = 'test';
-        $users->email = 'tesr@test.com';
-        $users->password = Hash::make('testtest');
+        $users->name = $request->name;
+        $users->email = $request->email;
+        $users->password = Hash::make($request->password);
         $users->save();
+          return ['name'=>$request->name,'name'=>$request->name,'name'=>$request->name];
+    }
+    
+    public function add()
+    {
+        //
     }
 
     // user 削除
