@@ -59,7 +59,7 @@ export default {
   },
   mounted() {
     this.getDate(0);
-    this.getUser(0);
+    this.getUser();
   },
   methods: {
     getDate: function(flag) {
@@ -70,18 +70,8 @@ export default {
         })
         .then(response => (this.dates = response.data.date));
     },
-    getUser: function(flag) {
-      if (flag == 0) {
-        axios.get("/users_get").then(response => (this.users = response.data));
-      } else {
-        axios
-          .post("/users_show", {
-            id: flag
-          })
-          .then(
-            response => ((this.users = response.data), console.log(this.users))
-          );
-      }
+    getUser: function() {
+      axios.get("/users_get").then(response => (this.users = response.data));
     }
   }
 };

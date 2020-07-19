@@ -2330,7 +2330,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     this.getDate(0);
-    this.getUser(0);
+    this.getUser();
   },
   methods: {
     getDate: function getDate(flag) {
@@ -2343,20 +2343,12 @@ __webpack_require__.r(__webpack_exports__);
         return _this.dates = response.data.date;
       });
     },
-    getUser: function getUser(flag) {
+    getUser: function getUser() {
       var _this2 = this;
 
-      if (flag == 0) {
-        axios.get("/users_get").then(function (response) {
-          return _this2.users = response.data;
-        });
-      } else {
-        axios.post("/users_show", {
-          id: flag
-        }).then(function (response) {
-          return _this2.users = response.data, console.log(_this2.users);
-        });
-      }
+      axios.get("/users_get").then(function (response) {
+        return _this2.users = response.data;
+      });
     }
   }
 });
@@ -38284,13 +38276,11 @@ var render = function() {
       _vm._v(" "),
       _c("tbody", [
         _c("tr", [
-          _c("th", { attrs: { scope: "row" } }, [
-            _vm._v(_vm._s(_vm.users[0].id))
-          ]),
+          _c("th", { attrs: { scope: "row" } }, [_vm._v(_vm._s(_vm.users.id))]),
           _vm._v(" "),
-          _c("th", [_vm._v(_vm._s(_vm.users[0].name))]),
+          _c("th", [_vm._v(_vm._s(_vm.users.name))]),
           _vm._v(" "),
-          _c("th", [_vm._v(_vm._s(_vm.users[0].email))])
+          _c("th", [_vm._v(_vm._s(_vm.users.email))])
         ])
       ])
     ])
