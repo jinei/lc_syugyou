@@ -14,7 +14,7 @@
       </select>
     </div>
 
-    <!-- 勤怠表 START -->
+    <!-- 勤怠表 -->
     <div class="table">
       <table class="table table-striped" border-collapse="collapse">
         <thead>
@@ -37,9 +37,15 @@
         <tbody>
           <tr v-for="user in users" :key="user.id" v-if="selectUser==0 || user.id==selectUser">
             <td>{{ user.name }}</td>
-            <td v-for="date in dates" :key="date.id">
-              17:00
-              <br />22:00
+            <td v-for="(date,index) in dates" :key="date.id">
+              <span
+                v-if="workings.map(item => item.day).includes(String(dates[index].day)) && workings[workings.map(item => item.day).indexOf(String(dates[index].day))].userid == user.id"
+              >
+                {{workings[workings.map(item => item.day).indexOf(String(dates[index].day))].starttime}}
+                <br />
+                {{workings[workings.map(item => item.day).indexOf(String(dates[index].day))].endtime}}
+              </span>
+              <span v-else>-</span>
             </td>
             <td>{{ user.name }}</td>
           </tr>
@@ -55,6 +61,7 @@ export default {
     return {
       dates: [],
       users: [],
+      workings: [],
       selectUser: 0
     };
   },
@@ -69,10 +76,25 @@ export default {
           flag: flag,
           now: this.dates[0]
         })
-        .then(response => (this.dates = response.data.date));
+        .then(
+          response => (
+            (this.dates = response.data.date), this.getWorking(this.dates[0])
+          )
+        );
     },
     getUser: function() {
       axios.get("/users_get").then(response => (this.users = response.data));
+    },
+    getWorking: function(date) {
+      axios
+        .post("/working_get", {
+          date: date
+        })
+        .then(
+          response => (
+            (this.workings = response.data), console.log(this.workings)
+          )
+        );
     }
   }
 };

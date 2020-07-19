@@ -49,7 +49,8 @@ Route::post('/user_create', "API\UserController@store");
 Route::post('/user_edit', "API\UserController@update");
 Route::post('/user_delete', "API\UserController@delete");
 
-Route::post('/date_get', "API\TimelineController@getDate");
+Route::post('/date_get', "API\TimelineController@getdate");
+Route::post('/working_get', "API\TimelineController@getworking");
 
 
 Route::get('/{any}', function() {

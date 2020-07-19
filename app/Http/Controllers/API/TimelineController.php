@@ -5,10 +5,11 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use App\Models\Working;
 
 class TimelineController extends Controller
 {
-    public function getDate(Request $request)
+    public function getdate(Request $request)
     {
         // ページ起動時
         if($request->flag == 0) {
@@ -37,6 +38,14 @@ class TimelineController extends Controller
             ]));
         }
         return ['date'=>$date];
+    }
+
+    public function getworking(Request $request)
+    {
+        $checkyear = $request->date['year'];
+        $checkmonth = $request->date['month'];
+        $data = Working::where('year',$checkyear)->where('month',$checkmonth)->get();
+        return $data;
     }
     
 }

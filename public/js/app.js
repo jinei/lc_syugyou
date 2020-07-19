@@ -2321,11 +2321,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       dates: [],
       users: [],
+      workings: [],
       selectUser: 0
     };
   },
@@ -2341,7 +2348,7 @@ __webpack_require__.r(__webpack_exports__);
         flag: flag,
         now: this.dates[0]
       }).then(function (response) {
-        return _this.dates = response.data.date;
+        return _this.dates = response.data.date, _this.getWorking(_this.dates[0]);
       });
     },
     getUser: function getUser() {
@@ -2349,6 +2356,15 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get("/users_get").then(function (response) {
         return _this2.users = response.data;
+      });
+    },
+    getWorking: function getWorking(date) {
+      var _this3 = this;
+
+      axios.post("/working_get", {
+        date: date
+      }).then(function (response) {
+        return _this3.workings = response.data, console.log(_this3.workings);
       });
     }
   }
@@ -38579,11 +38595,50 @@ var render = function() {
                     [
                       _c("td", [_vm._v(_vm._s(user.name))]),
                       _vm._v(" "),
-                      _vm._l(_vm.dates, function(date) {
+                      _vm._l(_vm.dates, function(date, index) {
                         return _c("td", { key: date.id }, [
-                          _vm._v("\n            17:00\n            "),
-                          _c("br"),
-                          _vm._v("22:00\n          ")
+                          _vm.workings
+                            .map(function(item) {
+                              return item.day
+                            })
+                            .includes(String(_vm.dates[index].day)) &&
+                          _vm.workings[
+                            _vm.workings
+                              .map(function(item) {
+                                return item.day
+                              })
+                              .indexOf(String(_vm.dates[index].day))
+                          ].userid == user.id
+                            ? _c("span", [
+                                _vm._v(
+                                  "\n              " +
+                                    _vm._s(
+                                      _vm.workings[
+                                        _vm.workings
+                                          .map(function(item) {
+                                            return item.day
+                                          })
+                                          .indexOf(String(_vm.dates[index].day))
+                                      ].starttime
+                                    ) +
+                                    "\n              "
+                                ),
+                                _c("br"),
+                                _vm._v(
+                                  "\n              " +
+                                    _vm._s(
+                                      _vm.workings[
+                                        _vm.workings
+                                          .map(function(item) {
+                                            return item.day
+                                          })
+                                          .indexOf(String(_vm.dates[index].day))
+                                      ].endtime
+                                    ) +
+                                    "\n            "
+                                )
+                              ])
+                            : _c("span", [_vm._v("-")])
                         ])
                       }),
                       _vm._v(" "),
