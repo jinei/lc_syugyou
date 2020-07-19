@@ -8,9 +8,9 @@
         <span class="glyphicon glyphicon-chevron-right" aria-hidden="true" @click="getDate(1)"></span>
       </div>
       <!-- ユーザー選択 -->
-      <select class="form-control" name="user">
-        <option value>全て</option>
-        <option v-for="user in users" :key="user.id">{{ user.name }}</option>
+      <select class="form-control" name="user" v-model="selectUser">
+        <option value="0">全て</option>
+        <option v-for="user in users" :key="user.id" v-bind:value="user.id">{{ user.name }}</option>
       </select>
     </div>
 
@@ -35,7 +35,7 @@
 
         <!-- 勤怠情報 -->
         <tbody>
-          <tr v-for="user in users" :key="user.id">
+          <tr v-for="user in users" :key="user.id" v-if="selectUser==0 || user.id==selectUser">
             <td>{{ user.name }}</td>
             <td v-for="date in dates" :key="date.id">
               17:00
@@ -54,7 +54,8 @@ export default {
   data() {
     return {
       dates: [],
-      users: []
+      users: [],
+      selectUser: 0
     };
   },
   mounted() {
