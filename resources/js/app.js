@@ -1,10 +1,10 @@
 import VueRouter from 'vue-router';
-import HeaderComponent from "./components/HeaderComponent";
-import AccountComponent from "./components/AccountComponent";
-import timelineComponent from "./components/timelineComponent";
-import AccountShowComponent from "./components/AccountShowComponent";
-import AccountEditComponent from "./components/AccountEditComponent";
-import AccountCreateComponent from "./components/AccountCreateComponent";
+import HeaderComponent from "./components/Header/index";
+import AccountComponent from "./components/Account/index";
+import timelineComponent from "./components/Timeline/index";
+import AccountShowComponent from "./components/AccountShow/index";
+import AccountEditComponent from "./components/AccountEdit/index";
+import AccountCreateComponent from "./components/AccountCreate/index";
 import VModal from "vue-js-modal";
 
 /**
