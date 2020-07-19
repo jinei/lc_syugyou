@@ -1957,24 +1957,20 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   mounted: function mounted() {
-    this.get_user();
+    this.getUser();
   },
   methods: {
-    add_user: function add_user() {
-      axios.post("/user_add").then();
-      this.get_user();
-    },
-    delete_user: function delete_user(id) {
+    deleteUser: function deleteUser(id) {
       var result = window.confirm("削除しますか？");
 
       if (result) {
         axios.post("/user_delete", {
           id: id
         });
-        this.get_user();
+        this.getUser();
       }
     },
-    get_user: function get_user() {
+    getUser: function getUser() {
       var _this = this;
 
       axios.get("/users_get").then(function (response) {
@@ -2325,7 +2321,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      date: []
+    };
+  },
+  mounted: function mounted() {
+    this.getDate();
+  },
+  methods: {
+    getDate: function getDate() {}
+  }
+});
 
 /***/ }),
 
@@ -37936,7 +37944,7 @@ var render = function() {
                     staticClass: "btn btn-danger",
                     on: {
                       click: function($event) {
-                        return _vm.delete_user(user.id)
+                        return _vm.deleteUser(user.id)
                       }
                     }
                   },

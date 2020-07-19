@@ -27,7 +27,7 @@
             </router-link>
           </td>
           <td>
-            <button class="btn btn-danger" @click="delete_user(user.id);">Delete</button>
+            <button class="btn btn-danger" @click="deleteUser(user.id);">Delete</button>
           </td>
         </tr>
       </tbody>
@@ -48,23 +48,19 @@ export default {
     };
   },
   mounted() {
-    this.get_user();
+    this.getUser();
   },
   methods: {
-    add_user: function() {
-      axios.post("/user_add").then();
-      this.get_user();
-    },
-    delete_user: function(id) {
+    deleteUser: function(id) {
       var result = window.confirm("削除しますか？");
       if (result) {
         axios.post("/user_delete", {
           id: id
         });
-        this.get_user();
+        this.getUser();
       }
     },
-    get_user: function() {
+    getUser: function() {
       axios.get("/users_get").then(response => (this.users = response.data));
     }
   }
