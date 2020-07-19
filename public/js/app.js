@@ -2414,26 +2414,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2478,17 +2458,29 @@ __webpack_require__.r(__webpack_exports__);
         return _this3.workings = response.data;
       });
     },
-    show: function show(user, day, id) {
+    show: function show(user, day, date) {
       var year = this.dates[0].year;
       var month = this.dates[0].month;
+
+      if (date != undefined) {
+        this.modalStarttime = date.starttime;
+        this.modalEndtime = date.endtime;
+      } else {
+        this.modalStarttime = "";
+        this.modalEndtime = "";
+      }
+
       this.modalDay = year + "/" + month + "/" + day;
       this.modalUser = user.name;
       this.$modal.show("add_plan");
-      this.modalStarttime = document.getElementById(id + "start").value;
-      this.modalEndtime = document.getElementById(id + "end").value;
     },
     hide: function hide() {
       this.$modal.hide("add_plan");
+    },
+    addPlan: function addPlan() {
+      axios.post("/add_plan", {
+        name: "name"
+      });
     }
   }
 });
@@ -38839,10 +38831,14 @@ var render = function() {
                               key: date.id,
                               on: {
                                 click: function($event) {
-                                  return _vm.show(
+                                  _vm.show(
                                     user,
                                     date.day,
-                                    index + user.name
+                                    _vm.workings[
+                                      _vm.tempArray.indexOf(
+                                        String(_vm.dates[index].day)
+                                      )
+                                    ]
                                   )
                                 }
                               }
@@ -38869,35 +38865,6 @@ var render = function() {
                                 )
                               ].userid == user.id
                                 ? _c("span", [
-                                    _c("input", {
-                                      attrs: {
-                                        type: "hidden",
-                                        id: index + user.name + "start"
-                                      },
-                                      domProps: {
-                                        value:
-                                          _vm.workings[
-                                            _vm.tempArray.indexOf(
-                                              String(_vm.dates[index].day)
-                                            )
-                                          ].starttime
-                                      }
-                                    }),
-                                    _vm._v(" "),
-                                    _c("input", {
-                                      attrs: {
-                                        type: "hidden",
-                                        id: index + user.name + "end"
-                                      },
-                                      domProps: {
-                                        value:
-                                          _vm.workings[
-                                            _vm.tempArray.indexOf(
-                                              String(_vm.dates[index].day)
-                                            )
-                                          ].endtime
-                                      }
-                                    }),
                                     _vm._v(
                                       "\n              " +
                                         _vm._s(
@@ -38922,24 +38889,7 @@ var render = function() {
                                         "\n            "
                                     )
                                   ])
-                                : _c("span", [
-                                    _c("input", {
-                                      attrs: {
-                                        type: "hidden",
-                                        id: index + user.name + "start",
-                                        value: ""
-                                      }
-                                    }),
-                                    _vm._v(" "),
-                                    _c("input", {
-                                      attrs: {
-                                        type: "hidden",
-                                        id: index + user.name + "end",
-                                        value: ""
-                                      }
-                                    }),
-                                    _vm._v("\n              -\n            ")
-                                  ])
+                                : _c("span", [_vm._v("-")])
                             ]
                           )
                         }),
@@ -38985,26 +38935,6 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "modal-body" }, [
-            _c("input", {
-              attrs: { type: "hidden", id: "userid", name: "userid" }
-            }),
-            _vm._v(" "),
-            _c("input", {
-              attrs: { type: "hidden", id: "year", name: "year" }
-            }),
-            _vm._v(" "),
-            _c("input", {
-              attrs: { type: "hidden", id: "month", name: "month" }
-            }),
-            _vm._v(" "),
-            _c("input", { attrs: { type: "hidden", id: "day", name: "day" } }),
-            _vm._v(" "),
-            _c("input", {
-              attrs: { type: "hidden", id: "workingid", name: "workingid" }
-            }),
-            _vm._v(" "),
-            _c("input", { attrs: { name: "key", type: "hidden", value: "" } }),
-            _vm._v(" "),
             _c("p", [
               _vm._v("\n        出勤時間：\n        "),
               _c("input", {
@@ -39069,12 +38999,8 @@ var render = function() {
           _c("div", { staticClass: "modal-footer" }, [
             _c("input", {
               staticClass: "btn btn-default btn-success",
-              attrs: {
-                type: "submit",
-                value: "作成",
-                name: "add",
-                onclick: "form.key.value='add'"
-              }
+              attrs: { type: "button", value: "作成", name: "add" },
+              on: { click: _vm.addPlan }
             })
           ])
         ]

@@ -41,32 +41,18 @@
             <td
               v-for="(date,index) in dates"
               :key="date.id"
-              @click="show(user,date.day,index + user.name)"
+              @click="show(user,date.day,workings[tempArray.indexOf(String(dates[index].day))])"
             >
               <span style="display:none;">{{ tempArray = workings.map(item => item.day) }}</span>
 
               <span
                 v-if="tempArray.includes(String(dates[index].day)) && workings[tempArray.indexOf(String(dates[index].day))].userid == user.id"
               >
-                <input
-                  type="hidden"
-                  v-bind:id="index + user.name + 'start'"
-                  v-bind:value="workings[tempArray.indexOf(String(dates[index].day))].starttime"
-                />
-                <input
-                  type="hidden"
-                  v-bind:id="index + user.name + 'end'"
-                  v-bind:value="workings[tempArray.indexOf(String(dates[index].day))].endtime"
-                />
                 {{workings[tempArray.indexOf(String(dates[index].day))].starttime}}
                 <br />
                 {{workings[tempArray.indexOf(String(dates[index].day))].endtime}}
               </span>
-              <span v-else>
-                <input type="hidden" v-bind:id="index + user.name + 'start'" value />
-                <input type="hidden" v-bind:id="index + user.name + 'end'" value />
-                -
-              </span>
+              <span v-else>-</span>
             </td>
             <td>{{ user.name }}</td>
           </tr>
@@ -87,12 +73,6 @@
 
       <!-- body -->
       <div class="modal-body">
-        <input type="hidden" id="userid" name="userid" />
-        <input type="hidden" id="year" name="year" />
-        <input type="hidden" id="month" name="month" />
-        <input type="hidden" id="day" name="day" />
-        <input type="hidden" id="workingid" name="workingid" />
-        <input name="key" type="hidden" value />
         <p>
           出勤時間：
           <input
@@ -119,11 +99,11 @@
       <!-- footer -->
       <div class="modal-footer">
         <input
-          type="submit"
+          type="button"
           class="btn btn-default btn-success"
           value="作成"
           name="add"
-          onclick="form.key.value='add'"
+          @click="addPlan"
         />
       </div>
     </modal>
@@ -171,17 +151,28 @@ export default {
         })
         .then(response => (this.workings = response.data));
     },
-    show: function(user, day, id) {
+    show: function(user, day, date) {
       const year = this.dates[0].year;
       const month = this.dates[0].month;
+
+      if (date != undefined) {
+        this.modalStarttime = date.starttime;
+        this.modalEndtime = date.endtime;
+      } else {
+        this.modalStarttime = "";
+        this.modalEndtime = "";
+      }
       this.modalDay = year + "/" + month + "/" + day;
       this.modalUser = user.name;
       this.$modal.show("add_plan");
-      this.modalStarttime = document.getElementById(id + "start").value;
-      this.modalEndtime = document.getElementById(id + "end").value;
     },
     hide: function() {
       this.$modal.hide("add_plan");
+    },
+    addPlan: function() {
+      axios.post("/add_plan", {
+        name: "name"
+      });
     }
   }
 };
