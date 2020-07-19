@@ -1,11 +1,11 @@
 <template>
   <div>
     <div class="selectctrl">
-      <!-- 日付選択 -->
+      <!-- 日付指定 -->
       <div style="font-size:1.3em;margin-bottom:2vh;">
-        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true" @click="getDate(-1)"></span>
         <strong>{{ dates[0].year }}/{{ dates[0].month }}</strong>
-        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true" @click="getDate(1)"></span>
       </div>
       <!-- ユーザー選択 -->
       <select class="form-control" name="user">
@@ -26,9 +26,9 @@
 
           <!-- 日付 -->
           <tr>
-            <th>7月</th>
+            <th>{{ dates[0].month }}月</th>
             <th v-for="date in dates" :key="date.id">{{date.day}}</th>
-            <th>7月</th>
+            <th>{{ dates[0].month }}月</th>
           </tr>
         </thead>
 
@@ -57,20 +57,23 @@ export default {
     };
   },
   mounted() {
-    this.getDate();
+    this.getDate(0);
     this.getUser();
   },
   methods: {
-    getDate: function() {
+    getDate: function(flag) {
       axios
-        .get("/date_get")
+        .post("/date_get", {
+          flag: flag,
+          now: this.dates[0]
+        })
         .then(
           response => (
-            (this.dates = response.data.date), console.log(this.dates)
+            (this.dates = response.data.date), console.log(response.data.test)
           )
         );
     },
-    getUser: function(date) {
+    getUser: function() {
       axios.get("/users_get").then(response => (this.users = response.data));
     }
   }

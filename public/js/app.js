@@ -2328,18 +2328,21 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   mounted: function mounted() {
-    this.getDate();
+    this.getDate(0);
     this.getUser();
   },
   methods: {
-    getDate: function getDate() {
+    getDate: function getDate(flag) {
       var _this = this;
 
-      axios.get("/date_get").then(function (response) {
-        return _this.dates = response.data.date, console.log(_this.dates);
+      axios.post("/date_get", {
+        flag: flag,
+        now: this.dates[0]
+      }).then(function (response) {
+        return _this.dates = response.data.date, console.log(response.data.test);
       });
     },
-    getUser: function getUser(date) {
+    getUser: function getUser() {
       var _this2 = this;
 
       axios.get("/users_get").then(function (response) {
@@ -38457,7 +38460,12 @@ var render = function() {
         [
           _c("span", {
             staticClass: "glyphicon glyphicon-chevron-left",
-            attrs: { "aria-hidden": "true" }
+            attrs: { "aria-hidden": "true" },
+            on: {
+              click: function($event) {
+                return _vm.getDate(-1)
+              }
+            }
           }),
           _vm._v(" "),
           _c("strong", [
@@ -38466,7 +38474,12 @@ var render = function() {
           _vm._v(" "),
           _c("span", {
             staticClass: "glyphicon glyphicon-chevron-right",
-            attrs: { "aria-hidden": "true" }
+            attrs: { "aria-hidden": "true" },
+            on: {
+              click: function($event) {
+                return _vm.getDate(1)
+              }
+            }
           })
         ]
       ),
@@ -38501,13 +38514,13 @@ var render = function() {
             _c(
               "tr",
               [
-                _c("th", [_vm._v("7月")]),
+                _c("th", [_vm._v(_vm._s(_vm.dates[0].month) + "月")]),
                 _vm._v(" "),
                 _vm._l(_vm.dates, function(date) {
                   return _c("th", { key: date.id }, [_vm._v(_vm._s(date.day))])
                 }),
                 _vm._v(" "),
-                _c("th", [_vm._v("7月")])
+                _c("th", [_vm._v(_vm._s(_vm.dates[0].month) + "月")])
               ],
               2
             )
