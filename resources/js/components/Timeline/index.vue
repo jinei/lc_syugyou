@@ -36,25 +36,27 @@
 
         <!-- 勤怠情報 -->
         <tbody>
-          <tr v-for="user in users" :key="user.id" v-if="selectUser==0 || user.id==selectUser">
-            <td>{{ user.name }}</td>
-            <td
-              v-for="(date,index) in dates"
-              :key="date.id"
-              @click="show(user,date.day,workings[tempArray.indexOf(String(dates[index].day))])"
-            >
-              <span style="display:none;">{{ tempArray = workings.map(item => item.day) }}</span>
-
-              <span
-                v-if="tempArray.includes(String(dates[index].day)) && workings[tempArray.indexOf(String(dates[index].day))].userid == user.id"
+          <tr v-for="user in users" :key="user.id">
+            <template v-if="selectUser==0 || user.id==selectUser">
+              <td>{{ user.name }}</td>
+              <td
+                v-for="(date,index) in dates"
+                :key="date.id"
+                @click="show(user,date.day,workings[tempArray.indexOf(String(dates[index].day))])"
               >
-                {{workings[tempArray.indexOf(String(dates[index].day))].starttime}}
-                <br />
-                {{workings[tempArray.indexOf(String(dates[index].day))].endtime}}
-              </span>
-              <span v-else>-</span>
-            </td>
-            <td>{{ user.name }}</td>
+                <span style="display:none;">{{ tempArray = workings.map(item => item.day) }}</span>
+
+                <span
+                  v-if="tempArray.includes(String(dates[index].day)) && workings[tempArray.indexOf(String(dates[index].day))].userid == user.id"
+                >
+                  {{workings[tempArray.indexOf(String(dates[index].day))].starttime}}
+                  <br />
+                  {{workings[tempArray.indexOf(String(dates[index].day))].endtime}}
+                </span>
+                <span v-else>-</span>
+              </td>
+              <td>{{ user.name }}</td>
+            </template>
           </tr>
         </tbody>
       </table>

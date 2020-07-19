@@ -2414,6 +2414,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -38837,88 +38839,94 @@ var render = function() {
             _c(
               "tbody",
               _vm._l(_vm.users, function(user) {
-                return _vm.selectUser == 0 || user.id == _vm.selectUser
-                  ? _c(
-                      "tr",
-                      { key: user.id },
-                      [
-                        _c("td", [_vm._v(_vm._s(user.name))]),
-                        _vm._v(" "),
-                        _vm._l(_vm.dates, function(date, index) {
-                          return _c(
-                            "td",
-                            {
-                              key: date.id,
-                              on: {
-                                click: function($event) {
-                                  _vm.show(
-                                    user,
-                                    date.day,
-                                    _vm.workings[
-                                      _vm.tempArray.indexOf(
-                                        String(_vm.dates[index].day)
-                                      )
-                                    ]
-                                  )
-                                }
-                              }
-                            },
-                            [
-                              _c("span", { staticStyle: { display: "none" } }, [
-                                _vm._v(
-                                  _vm._s(
-                                    (_vm.tempArray = _vm.workings.map(function(
-                                      item
-                                    ) {
-                                      return item.day
-                                    }))
-                                  )
-                                )
-                              ]),
-                              _vm._v(" "),
-                              _vm.tempArray.includes(
-                                String(_vm.dates[index].day)
-                              ) &&
-                              _vm.workings[
-                                _vm.tempArray.indexOf(
-                                  String(_vm.dates[index].day)
-                                )
-                              ].userid == user.id
-                                ? _c("span", [
-                                    _vm._v(
-                                      "\n              " +
-                                        _vm._s(
-                                          _vm.workings[
-                                            _vm.tempArray.indexOf(
-                                              String(_vm.dates[index].day)
-                                            )
-                                          ].starttime
-                                        ) +
-                                        "\n              "
-                                    ),
-                                    _c("br"),
-                                    _vm._v(
-                                      "\n              " +
-                                        _vm._s(
-                                          _vm.workings[
-                                            _vm.tempArray.indexOf(
-                                              String(_vm.dates[index].day)
-                                            )
-                                          ].endtime
-                                        ) +
-                                        "\n            "
+                return _c(
+                  "tr",
+                  { key: user.id },
+                  [
+                    _vm.selectUser == 0 || user.id == _vm.selectUser
+                      ? [
+                          _c("td", [_vm._v(_vm._s(user.name))]),
+                          _vm._v(" "),
+                          _vm._l(_vm.dates, function(date, index) {
+                            return _c(
+                              "td",
+                              {
+                                key: date.id,
+                                on: {
+                                  click: function($event) {
+                                    _vm.show(
+                                      user,
+                                      date.day,
+                                      _vm.workings[
+                                        _vm.tempArray.indexOf(
+                                          String(_vm.dates[index].day)
+                                        )
+                                      ]
                                     )
-                                  ])
-                                : _c("span", [_vm._v("-")])
-                            ]
-                          )
-                        }),
-                        _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(user.name))])
-                      ],
-                      2
-                    )
-                  : _vm._e()
+                                  }
+                                }
+                              },
+                              [
+                                _c(
+                                  "span",
+                                  { staticStyle: { display: "none" } },
+                                  [
+                                    _vm._v(
+                                      _vm._s(
+                                        (_vm.tempArray = _vm.workings.map(
+                                          function(item) {
+                                            return item.day
+                                          }
+                                        ))
+                                      )
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _vm.tempArray.includes(
+                                  String(_vm.dates[index].day)
+                                ) &&
+                                _vm.workings[
+                                  _vm.tempArray.indexOf(
+                                    String(_vm.dates[index].day)
+                                  )
+                                ].userid == user.id
+                                  ? _c("span", [
+                                      _vm._v(
+                                        "\n                " +
+                                          _vm._s(
+                                            _vm.workings[
+                                              _vm.tempArray.indexOf(
+                                                String(_vm.dates[index].day)
+                                              )
+                                            ].starttime
+                                          ) +
+                                          "\n                "
+                                      ),
+                                      _c("br"),
+                                      _vm._v(
+                                        "\n                " +
+                                          _vm._s(
+                                            _vm.workings[
+                                              _vm.tempArray.indexOf(
+                                                String(_vm.dates[index].day)
+                                              )
+                                            ].endtime
+                                          ) +
+                                          "\n              "
+                                      )
+                                    ])
+                                  : _c("span", [_vm._v("-")])
+                              ]
+                            )
+                          }),
+                          _vm._v(" "),
+                          _c("td", [_vm._v(_vm._s(user.name))])
+                        ]
+                      : _vm._e()
+                  ],
+                  2
+                )
               }),
               0
             )
