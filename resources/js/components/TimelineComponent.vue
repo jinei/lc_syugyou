@@ -38,18 +38,35 @@
         <tbody>
           <tr v-for="user in users" :key="user.id" v-if="selectUser==0 || user.id==selectUser">
             <td>{{ user.name }}</td>
-            <td v-for="(date,index) in dates" :key="date.id" @click="show(user,date.day)">
+            <td
+              v-for="(date,index) in dates"
+              :key="date.id"
+              @click="show(user,date.day,index + user.name)"
+            >
               <span style="display:none;">{{ tempArray = workings.map(item => item.day) }}</span>
 
               <span
                 v-if="tempArray.includes(String(dates[index].day)) && workings[tempArray.indexOf(String(dates[index].day))].userid == user.id"
               >
-                <input type="hidden" />
+                <input
+                  type="hidden"
+                  v-bind:id="index + user.name + 'start'"
+                  v-bind:value="workings[tempArray.indexOf(String(dates[index].day))].starttime"
+                />
+                <input
+                  type="hidden"
+                  v-bind:id="index + user.name + 'end'"
+                  v-bind:value="workings[tempArray.indexOf(String(dates[index].day))].endtime"
+                />
                 {{workings[tempArray.indexOf(String(dates[index].day))].starttime}}
                 <br />
                 {{workings[tempArray.indexOf(String(dates[index].day))].endtime}}
               </span>
-              <span v-else>-</span>
+              <span v-else>
+                <input type="hidden" v-bind:id="index + user.name + 'start'" value />
+                <input type="hidden" v-bind:id="index + user.name + 'end'" value />
+                -
+              </span>
             </td>
             <td>{{ user.name }}</td>
           </tr>
@@ -78,11 +95,17 @@
         <input name="key" type="hidden" value />
         <p>
           出勤時間：
-          <input type="time" class="form-control" id="start" name="start" />
+          <input
+            type="time"
+            v-model="modalStarttime"
+            class="form-control"
+            id="start"
+            name="start"
+          />
         </p>
         <p>
           退勤時間：
-          <input type="time" class="form-control" id="end" name="end" />
+          <input type="time" v-model="modalEndtime" class="form-control" id="end" name="end" />
         </p>
         <input
           type="submit"
@@ -116,7 +139,9 @@ export default {
       workings: [],
       selectUser: 0,
       modalDay: "",
-      modalUser: ""
+      modalUser: "",
+      modalStarttime: "",
+      modalEndtime: ""
     };
   },
   mounted() {
@@ -144,18 +169,16 @@ export default {
         .post("/working_get", {
           date: date
         })
-        .then(
-          response => (
-            (this.workings = response.data), console.log(this.workings)
-          )
-        );
+        .then(response => (this.workings = response.data));
     },
-    show: function(user, day) {
+    show: function(user, day, id) {
       const year = this.dates[0].year;
       const month = this.dates[0].month;
       this.modalDay = year + "/" + month + "/" + day;
       this.modalUser = user.name;
       this.$modal.show("add_plan");
+      this.modalStarttime = document.getElementById(id + "start").value;
+      this.modalEndtime = document.getElementById(id + "end").value;
     },
     hide: function() {
       this.$modal.hide("add_plan");

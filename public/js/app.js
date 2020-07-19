@@ -2411,6 +2411,29 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2419,7 +2442,9 @@ __webpack_require__.r(__webpack_exports__);
       workings: [],
       selectUser: 0,
       modalDay: "",
-      modalUser: ""
+      modalUser: "",
+      modalStarttime: "",
+      modalEndtime: ""
     };
   },
   mounted: function mounted() {
@@ -2450,15 +2475,17 @@ __webpack_require__.r(__webpack_exports__);
       axios.post("/working_get", {
         date: date
       }).then(function (response) {
-        return _this3.workings = response.data, console.log(_this3.workings);
+        return _this3.workings = response.data;
       });
     },
-    show: function show(user, day) {
+    show: function show(user, day, id) {
       var year = this.dates[0].year;
       var month = this.dates[0].month;
       this.modalDay = year + "/" + month + "/" + day;
       this.modalUser = user.name;
       this.$modal.show("add_plan");
+      this.modalStarttime = document.getElementById(id + "start").value;
+      this.modalEndtime = document.getElementById(id + "end").value;
     },
     hide: function hide() {
       this.$modal.hide("add_plan");
@@ -38812,7 +38839,11 @@ var render = function() {
                               key: date.id,
                               on: {
                                 click: function($event) {
-                                  return _vm.show(user, date.day)
+                                  return _vm.show(
+                                    user,
+                                    date.day,
+                                    index + user.name
+                                  )
                                 }
                               }
                             },
@@ -38838,7 +38869,35 @@ var render = function() {
                                 )
                               ].userid == user.id
                                 ? _c("span", [
-                                    _c("input", { attrs: { type: "hidden" } }),
+                                    _c("input", {
+                                      attrs: {
+                                        type: "hidden",
+                                        id: index + user.name + "start"
+                                      },
+                                      domProps: {
+                                        value:
+                                          _vm.workings[
+                                            _vm.tempArray.indexOf(
+                                              String(_vm.dates[index].day)
+                                            )
+                                          ].starttime
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("input", {
+                                      attrs: {
+                                        type: "hidden",
+                                        id: index + user.name + "end"
+                                      },
+                                      domProps: {
+                                        value:
+                                          _vm.workings[
+                                            _vm.tempArray.indexOf(
+                                              String(_vm.dates[index].day)
+                                            )
+                                          ].endtime
+                                      }
+                                    }),
                                     _vm._v(
                                       "\n              " +
                                         _vm._s(
@@ -38863,7 +38922,24 @@ var render = function() {
                                         "\n            "
                                     )
                                   ])
-                                : _c("span", [_vm._v("-")])
+                                : _c("span", [
+                                    _c("input", {
+                                      attrs: {
+                                        type: "hidden",
+                                        id: index + user.name + "start",
+                                        value: ""
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("input", {
+                                      attrs: {
+                                        type: "hidden",
+                                        id: index + user.name + "end",
+                                        value: ""
+                                      }
+                                    }),
+                                    _vm._v("\n              -\n            ")
+                                  ])
                             ]
                           )
                         }),
@@ -38932,16 +39008,50 @@ var render = function() {
             _c("p", [
               _vm._v("\n        出勤時間：\n        "),
               _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.modalStarttime,
+                    expression: "modalStarttime"
+                  }
+                ],
                 staticClass: "form-control",
-                attrs: { type: "time", id: "start", name: "start" }
+                attrs: { type: "time", id: "start", name: "start" },
+                domProps: { value: _vm.modalStarttime },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.modalStarttime = $event.target.value
+                  }
+                }
               })
             ]),
             _vm._v(" "),
             _c("p", [
               _vm._v("\n        退勤時間：\n        "),
               _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.modalEndtime,
+                    expression: "modalEndtime"
+                  }
+                ],
                 staticClass: "form-control",
-                attrs: { type: "time", id: "end", name: "end" }
+                attrs: { type: "time", id: "end", name: "end" },
+                domProps: { value: _vm.modalEndtime },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.modalEndtime = $event.target.value
+                  }
+                }
               })
             ]),
             _vm._v(" "),
