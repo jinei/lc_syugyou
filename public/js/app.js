@@ -2466,7 +2466,7 @@ __webpack_require__.r(__webpack_exports__);
       var month = this.dates[0].month;
       this.modalDay = day;
 
-      if (date != undefined) {
+      if (date != undefined && user.id == date.userid) {
         this.modalStarttime = date.starttime;
         this.modalEndtime = date.endtime;
         this.modalWorkingId = date.id;
@@ -2494,6 +2494,13 @@ __webpack_require__.r(__webpack_exports__);
         month: this.dates[0].month,
         year: this.dates[0].year
       }).then(this.getWorking(this.dates[0], this.hide()));
+    },
+    deletePlan: function deletePlan() {
+      if (this.modalWorkingId) {
+        axios.post("/working_delete", {
+          id: this.modalWorkingId
+        }).then(this.getWorking(this.dates[0], this.hide()));
+      }
     }
   }
 });
@@ -39000,12 +39007,8 @@ var render = function() {
             _vm._v(" "),
             _c("input", {
               staticClass: "btn btn-default btn-danger",
-              attrs: {
-                type: "submit",
-                value: "削除",
-                name: "delete",
-                onclick: "form.key.value='delete'"
-              }
+              attrs: { type: "button", value: "削除", name: "delete" },
+              on: { click: _vm.deletePlan }
             })
           ]),
           _vm._v(" "),

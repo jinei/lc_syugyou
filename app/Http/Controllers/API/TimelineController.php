@@ -64,4 +64,9 @@ class TimelineController extends Controller
         $workings->userid = $request->userid;
         $workings->save();
     }
+
+    public function deleteworking(Request $request)
+    {
+        $workings = Working::find($request->id)->delete();
+    }
 }

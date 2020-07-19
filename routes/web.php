@@ -52,6 +52,7 @@ Route::post('/user_delete', "API\UserController@delete");
 Route::post('/date_get', "API\TimelineController@getdate");
 Route::post('/working_get', "API\TimelineController@getworking");
 Route::post('/working_add', "API\TimelineController@addworking");
+Route::post('/working_delete', "API\TimelineController@deleteworking");
 
 
 Route::get('/{any}', function() {

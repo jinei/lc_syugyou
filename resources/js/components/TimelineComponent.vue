@@ -88,11 +88,11 @@
           <input type="time" v-model="modalEndtime" class="form-control" id="end" name="end" />
         </p>
         <input
-          type="submit"
+          type="button"
           class="btn btn-default btn-danger"
           value="削除"
           name="delete"
-          onclick="form.key.value='delete'"
+          @click="deletePlan"
         />
       </div>
 
@@ -158,7 +158,7 @@ export default {
       const year = this.dates[0].year;
       const month = this.dates[0].month;
       this.modalDay = day;
-      if (date != undefined) {
+      if (date != undefined && user.id == date.userid) {
         this.modalStarttime = date.starttime;
         this.modalEndtime = date.endtime;
         this.modalWorkingId = date.id;
@@ -187,6 +187,15 @@ export default {
           year: this.dates[0].year
         })
         .then(this.getWorking(this.dates[0], this.hide()));
+    },
+    deletePlan: function() {
+      if (this.modalWorkingId) {
+        axios
+          .post("/working_delete", {
+            id: this.modalWorkingId
+          })
+          .then(this.getWorking(this.dates[0], this.hide()));
+      }
     }
   }
 };
