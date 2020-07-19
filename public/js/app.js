@@ -2028,6 +2028,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2061,6 +2065,9 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
 //
 //
 //
@@ -2142,6 +2149,10 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
 //
 //
 //
@@ -38133,6 +38144,8 @@ var render = function() {
     "div",
     { staticStyle: { "text-align": "center" } },
     [
+      _vm._m(0),
+      _vm._v(" "),
       _c("div", { staticClass: "form-group" }, [
         _c("label", { attrs: { for: "usr" } }, [_vm._v("ユーザー名:")]),
         _vm._v(" "),
@@ -38233,7 +38246,7 @@ var render = function() {
       _c("router-link", { attrs: { to: { name: "account.list" } } }, [
         _c(
           "button",
-          { staticClass: "btn btn-primary", attrs: { type: "button" } },
+          { staticClass: "btn btn-default", attrs: { type: "button" } },
           [
             _c("span", {
               staticClass: "glyphicon glyphicon-circle-arrow-left"
@@ -38246,7 +38259,16 @@ var render = function() {
     1
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h4", { staticStyle: { "margin-bottom": "5vh" } }, [
+      _c("strong", [_vm._v("アカウント作成")])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -38272,6 +38294,8 @@ var render = function() {
     "div",
     { staticStyle: { "text-align": "center" } },
     [
+      _vm._m(0),
+      _vm._v(" "),
       _c("div", { staticClass: "form-group" }, [
         _c("label", { attrs: { for: "pwd" } }, [_vm._v("ID:")]),
         _vm._v(" "),
@@ -38372,7 +38396,7 @@ var render = function() {
       _c("router-link", { attrs: { to: { name: "account.list" } } }, [
         _c(
           "button",
-          { staticClass: "btn btn-primary", attrs: { type: "button" } },
+          { staticClass: "btn btn-default", attrs: { type: "button" } },
           [
             _c("span", {
               staticClass: "glyphicon glyphicon-circle-arrow-left"
@@ -38385,7 +38409,16 @@ var render = function() {
     1
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h4", { staticStyle: { "margin-bottom": "5vh" } }, [
+      _c("strong", [_vm._v("アカウント編集")])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -38411,8 +38444,10 @@ var render = function() {
     "div",
     { staticClass: "container" },
     [
+      _vm._m(0),
+      _vm._v(" "),
       _c("table", { staticClass: "table table-hover" }, [
-        _vm._m(0),
+        _vm._m(1),
         _vm._v(" "),
         _c("tbody", [
           _c("tr", [
@@ -38430,7 +38465,7 @@ var render = function() {
       _c("router-link", { attrs: { to: { name: "account.list" } } }, [
         _c(
           "button",
-          { staticClass: "btn btn-primary", attrs: { type: "button" } },
+          { staticClass: "btn btn-default", attrs: { type: "button" } },
           [
             _c("span", {
               staticClass: "glyphicon glyphicon-circle-arrow-left"
@@ -38444,6 +38479,16 @@ var render = function() {
   )
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "h4",
+      { staticStyle: { "margin-bottom": "5vh", "text-align": "center" } },
+      [_c("strong", [_vm._v("アカウント詳細")])]
+    )
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement

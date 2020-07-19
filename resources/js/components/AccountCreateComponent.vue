@@ -1,5 +1,9 @@
 <template>
   <div style="text-align:center;">
+    <h4 style="margin-bottom:5vh;">
+      <strong>アカウント作成</strong>
+    </h4>
+
     <div class="form-group">
       <label for="usr">ユーザー名:</label>
       <br />
@@ -28,7 +32,7 @@
     </p>
 
     <router-link v-bind:to="{name: 'account.list'}">
-      <button type="button" class="btn btn-primary">
+      <button type="button" class="btn btn-default">
         <span class="glyphicon glyphicon-circle-arrow-left"></span> 戻る
       </button>
     </router-link>

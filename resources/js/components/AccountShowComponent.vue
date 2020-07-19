@@ -1,5 +1,9 @@
 <template>
   <div class="container">
+    <h4 style="margin-bottom:5vh;text-align:center;">
+      <strong>アカウント詳細</strong>
+    </h4>
+
     <table class="table table-hover">
       <thead class="thead-light">
         <tr>
@@ -17,7 +21,7 @@
       </tbody>
     </table>
     <router-link v-bind:to="{name: 'account.list'}">
-      <button type="button" class="btn btn-primary">
+      <button type="button" class="btn btn-default">
         <span class="glyphicon glyphicon-circle-arrow-left"></span> 戻る
       </button>
     </router-link>
