@@ -16,6 +16,11 @@
         </tr>
       </tbody>
     </table>
+    <router-link v-bind:to="{name: 'account.list'}">
+      <button type="button" class="btn btn-primary">
+        <span class="glyphicon glyphicon-circle-arrow-left"></span> 戻る
+      </button>
+    </router-link>
   </div>
 </template>
 

@@ -18,12 +18,20 @@
       <input v-model="password" type="password" class="form-control" id="pw" />
     </div>
 
-    <button
-      type="button"
-      class="btn btn-primary"
-      style="margin-top:2vh;width:10vw;"
-      @click="create_user"
-    >作成</button>
+    <p>
+      <button
+        type="button"
+        class="btn btn-warning"
+        style="margin-top:2vh;width:10vw;"
+        @click="create_user"
+      >作成</button>
+    </p>
+
+    <router-link v-bind:to="{name: 'account.list'}">
+      <button type="button" class="btn btn-primary">
+        <span class="glyphicon glyphicon-circle-arrow-left"></span> 戻る
+      </button>
+    </router-link>
   </div>
 </template>
 

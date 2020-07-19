@@ -2020,6 +2020,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2053,6 +2061,14 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2126,6 +2142,11 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
 //
 //
 //
@@ -38108,102 +38129,122 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticStyle: { "text-align": "center" } }, [
-    _c("div", { staticClass: "form-group" }, [
-      _c("label", { attrs: { for: "usr" } }, [_vm._v("ユーザー名:")]),
-      _vm._v(" "),
-      _c("br"),
-      _vm._v(" "),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.name,
-            expression: "name"
-          }
-        ],
-        staticClass: "form-control",
-        attrs: { type: "text", id: "usr" },
-        domProps: { value: _vm.name },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
+  return _c(
+    "div",
+    { staticStyle: { "text-align": "center" } },
+    [
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", { attrs: { for: "usr" } }, [_vm._v("ユーザー名:")]),
+        _vm._v(" "),
+        _c("br"),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.name,
+              expression: "name"
             }
-            _vm.name = $event.target.value
-          }
-        }
-      })
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "form-group" }, [
-      _c("label", { attrs: { for: "usr" } }, [_vm._v("メールアドレス:")]),
-      _vm._v(" "),
-      _c("br"),
-      _vm._v(" "),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.email,
-            expression: "email"
-          }
-        ],
-        staticClass: "form-control",
-        attrs: { type: "text", id: "email" },
-        domProps: { value: _vm.email },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
+          ],
+          staticClass: "form-control",
+          attrs: { type: "text", id: "usr" },
+          domProps: { value: _vm.name },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.name = $event.target.value
             }
-            _vm.email = $event.target.value
           }
-        }
-      })
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "form-group" }, [
-      _c("label", { attrs: { for: "usr" } }, [_vm._v("パスワード:")]),
+        })
+      ]),
       _vm._v(" "),
-      _c("br"),
-      _vm._v(" "),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.password,
-            expression: "password"
-          }
-        ],
-        staticClass: "form-control",
-        attrs: { type: "password", id: "pw" },
-        domProps: { value: _vm.password },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", { attrs: { for: "usr" } }, [_vm._v("メールアドレス:")]),
+        _vm._v(" "),
+        _c("br"),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.email,
+              expression: "email"
             }
-            _vm.password = $event.target.value
+          ],
+          staticClass: "form-control",
+          attrs: { type: "text", id: "email" },
+          domProps: { value: _vm.email },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.email = $event.target.value
+            }
           }
-        }
-      })
-    ]),
-    _vm._v(" "),
-    _c(
-      "button",
-      {
-        staticClass: "btn btn-primary",
-        staticStyle: { "margin-top": "2vh", width: "10vw" },
-        attrs: { type: "button" },
-        on: { click: _vm.create_user }
-      },
-      [_vm._v("作成")]
-    )
-  ])
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", { attrs: { for: "usr" } }, [_vm._v("パスワード:")]),
+        _vm._v(" "),
+        _c("br"),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.password,
+              expression: "password"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: { type: "password", id: "pw" },
+          domProps: { value: _vm.password },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.password = $event.target.value
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("p", [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-warning",
+            staticStyle: { "margin-top": "2vh", width: "10vw" },
+            attrs: { type: "button" },
+            on: { click: _vm.create_user }
+          },
+          [_vm._v("作成")]
+        )
+      ]),
+      _vm._v(" "),
+      _c("router-link", { attrs: { to: { name: "account.list" } } }, [
+        _c(
+          "button",
+          { staticClass: "btn btn-primary", attrs: { type: "button" } },
+          [
+            _c("span", {
+              staticClass: "glyphicon glyphicon-circle-arrow-left"
+            }),
+            _vm._v(" 戻る\n    ")
+          ]
+        )
+      ])
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -38227,102 +38268,122 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticStyle: { "text-align": "center" } }, [
-    _c("div", { staticClass: "form-group" }, [
-      _c("label", { attrs: { for: "pwd" } }, [_vm._v("ID:")]),
-      _vm._v(" "),
-      _c("br"),
-      _vm._v(" "),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.users.id,
-            expression: "users.id"
-          }
-        ],
-        staticClass: "form-control",
-        attrs: { type: "number", id: "id", readonly: "" },
-        domProps: { value: _vm.users.id },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
+  return _c(
+    "div",
+    { staticStyle: { "text-align": "center" } },
+    [
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", { attrs: { for: "pwd" } }, [_vm._v("ID:")]),
+        _vm._v(" "),
+        _c("br"),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.users.id,
+              expression: "users.id"
             }
-            _vm.$set(_vm.users, "id", $event.target.value)
-          }
-        }
-      })
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "form-group" }, [
-      _c("label", { attrs: { for: "usr" } }, [_vm._v("ユーザー名:")]),
-      _vm._v(" "),
-      _c("br"),
-      _vm._v(" "),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.users.name,
-            expression: "users.name"
-          }
-        ],
-        staticClass: "form-control",
-        attrs: { type: "text", id: "usr" },
-        domProps: { value: _vm.users.name },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
+          ],
+          staticClass: "form-control",
+          attrs: { type: "number", id: "id", readonly: "" },
+          domProps: { value: _vm.users.id },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.users, "id", $event.target.value)
             }
-            _vm.$set(_vm.users, "name", $event.target.value)
           }
-        }
-      })
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "form-group" }, [
-      _c("label", { attrs: { for: "usr" } }, [_vm._v("メールアドレス:")]),
+        })
+      ]),
       _vm._v(" "),
-      _c("br"),
-      _vm._v(" "),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.users.email,
-            expression: "users.email"
-          }
-        ],
-        staticClass: "form-control",
-        attrs: { type: "text", id: "usr", readonly: "" },
-        domProps: { value: _vm.users.email },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", { attrs: { for: "usr" } }, [_vm._v("ユーザー名:")]),
+        _vm._v(" "),
+        _c("br"),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.users.name,
+              expression: "users.name"
             }
-            _vm.$set(_vm.users, "email", $event.target.value)
+          ],
+          staticClass: "form-control",
+          attrs: { type: "text", id: "usr" },
+          domProps: { value: _vm.users.name },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.users, "name", $event.target.value)
+            }
           }
-        }
-      })
-    ]),
-    _vm._v(" "),
-    _c(
-      "button",
-      {
-        staticClass: "btn btn-primary",
-        staticStyle: { "margin-top": "2vh", width: "10vw" },
-        attrs: { type: "button" },
-        on: { click: _vm.update_user }
-      },
-      [_vm._v("更新")]
-    )
-  ])
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", { attrs: { for: "usr" } }, [_vm._v("メールアドレス:")]),
+        _vm._v(" "),
+        _c("br"),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.users.email,
+              expression: "users.email"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: { type: "text", id: "usr", readonly: "" },
+          domProps: { value: _vm.users.email },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.users, "email", $event.target.value)
+            }
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("p", [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-success",
+            staticStyle: { "margin-top": "2vh", width: "10vw" },
+            attrs: { type: "button" },
+            on: { click: _vm.update_user }
+          },
+          [_vm._v("更新")]
+        )
+      ]),
+      _vm._v(" "),
+      _c("router-link", { attrs: { to: { name: "account.list" } } }, [
+        _c(
+          "button",
+          { staticClass: "btn btn-primary", attrs: { type: "button" } },
+          [
+            _c("span", {
+              staticClass: "glyphicon glyphicon-circle-arrow-left"
+            }),
+            _vm._v(" 戻る\n    ")
+          ]
+        )
+      ])
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -38346,21 +38407,41 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container" }, [
-    _c("table", { staticClass: "table table-hover" }, [
-      _vm._m(0),
-      _vm._v(" "),
-      _c("tbody", [
-        _c("tr", [
-          _c("th", { attrs: { scope: "row" } }, [_vm._v(_vm._s(_vm.users.id))]),
-          _vm._v(" "),
-          _c("th", [_vm._v(_vm._s(_vm.users.name))]),
-          _vm._v(" "),
-          _c("th", [_vm._v(_vm._s(_vm.users.email))])
+  return _c(
+    "div",
+    { staticClass: "container" },
+    [
+      _c("table", { staticClass: "table table-hover" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c("tbody", [
+          _c("tr", [
+            _c("th", { attrs: { scope: "row" } }, [
+              _vm._v(_vm._s(_vm.users.id))
+            ]),
+            _vm._v(" "),
+            _c("th", [_vm._v(_vm._s(_vm.users.name))]),
+            _vm._v(" "),
+            _c("th", [_vm._v(_vm._s(_vm.users.email))])
+          ])
         ])
+      ]),
+      _vm._v(" "),
+      _c("router-link", { attrs: { to: { name: "account.list" } } }, [
+        _c(
+          "button",
+          { staticClass: "btn btn-primary", attrs: { type: "button" } },
+          [
+            _c("span", {
+              staticClass: "glyphicon glyphicon-circle-arrow-left"
+            }),
+            _vm._v(" 戻る\n    ")
+          ]
+        )
       ])
-    ])
-  ])
+    ],
+    1
+  )
 }
 var staticRenderFns = [
   function() {

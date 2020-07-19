@@ -18,12 +18,20 @@
       <input type="text" class="form-control" id="usr" v-model="users.email" readonly />
     </div>
 
-    <button
-      type="button"
-      class="btn btn-primary"
-      style="margin-top:2vh;width:10vw;"
-      @click="update_user"
-    >更新</button>
+    <p>
+      <button
+        type="button"
+        class="btn btn-success"
+        style="margin-top:2vh;width:10vw;"
+        @click="update_user"
+      >更新</button>
+    </p>
+
+    <router-link v-bind:to="{name: 'account.list'}">
+      <button type="button" class="btn btn-primary">
+        <span class="glyphicon glyphicon-circle-arrow-left"></span> 戻る
+      </button>
+    </router-link>
   </div>
 </template>
 
