@@ -22,26 +22,26 @@
           <!-- 曜日 -->
           <tr class="active">
             <th>Hallstaff</th>
-            <th>曜日</th>
+            <th v-for="date in dates" :key="date.id">{{date.week}}</th>
             <th>Hallstaff</th>
           </tr>
 
           <!-- 日付 -->
           <tr>
             <th>7月</th>
-            <th>日付</th>
+            <th v-for="date in dates" :key="date.id">{{date.day}}</th>
             <th>7月</th>
           </tr>
         </thead>
 
         <tbody>
-          <tr>
-            <td>名前</td>
-            <td data-toggle="modal" data-target="#addModal">
+          <tr v-for="user in users" :key="user.id">
+            <td>{{ user.name }}</td>
+            <td v-for="date in dates" :key="date.id">
               17:00
               <br />22:00
             </td>
-            <td>名前</td>
+            <td>{{ user.name }}</td>
           </tr>
         </tbody>
       </table>
@@ -50,5 +50,30 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      dates: [],
+      users: []
+    };
+  },
+  mounted() {
+    this.getDate();
+    this.getUser();
+  },
+  methods: {
+    getDate: function() {
+      axios
+        .get("/date_get")
+        .then(
+          response => (
+            (this.dates = response.data.date), console.log(this.dates)
+          )
+        );
+    },
+    getUser: function() {
+      axios.get("/users_get").then(response => (this.users = response.data));
+    }
+  }
+};
 </script>

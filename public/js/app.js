@@ -2324,14 +2324,29 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      date: []
+      dates: [],
+      users: []
     };
   },
   mounted: function mounted() {
     this.getDate();
+    this.getUser();
   },
   methods: {
-    getDate: function getDate() {}
+    getDate: function getDate() {
+      var _this = this;
+
+      axios.get("/date_get").then(function (response) {
+        return _this.dates = response.data.date, console.log(_this.dates);
+      });
+    },
+    getUser: function getUser() {
+      var _this2 = this;
+
+      axios.get("/users_get").then(function (response) {
+        return _this2.users = response.data;
+      });
+    }
   }
 });
 
@@ -38435,80 +38450,95 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("div", { staticClass: "table" }, [
+      _c(
+        "table",
+        {
+          staticClass: "table table-striped",
+          attrs: { "border-collapse": "collapse" }
+        },
+        [
+          _c("thead", [
+            _c(
+              "tr",
+              { staticClass: "active" },
+              [
+                _c("th", [_vm._v("Hallstaff")]),
+                _vm._v(" "),
+                _vm._l(_vm.dates, function(date) {
+                  return _c("th", { key: date.id }, [_vm._v(_vm._s(date.week))])
+                }),
+                _vm._v(" "),
+                _c("th", [_vm._v("Hallstaff")])
+              ],
+              2
+            ),
+            _vm._v(" "),
+            _c(
+              "tr",
+              [
+                _c("th", [_vm._v("7月")]),
+                _vm._v(" "),
+                _vm._l(_vm.dates, function(date) {
+                  return _c("th", { key: date.id }, [_vm._v(_vm._s(date.day))])
+                }),
+                _vm._v(" "),
+                _c("th", [_vm._v("7月")])
+              ],
+              2
+            )
+          ]),
+          _vm._v(" "),
+          _c(
+            "tbody",
+            _vm._l(_vm.users, function(user) {
+              return _c(
+                "tr",
+                { key: user.id },
+                [
+                  _c("td", [_vm._v(_vm._s(user.name))]),
+                  _vm._v(" "),
+                  _vm._l(_vm.dates, function(date) {
+                    return _c("td", { key: date.id }, [
+                      _vm._v("\n            17:00\n            "),
+                      _c("br"),
+                      _vm._v("22:00\n          ")
+                    ])
+                  }),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(user.name))])
+                ],
+                2
+              )
+            }),
+            0
+          )
+        ]
+      )
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("div", { staticClass: "selectctrl" }, [
-        _c("label", { attrs: { for: "sel1" } }, [_vm._v("年月:")]),
+    return _c("div", { staticClass: "selectctrl" }, [
+      _c("label", { attrs: { for: "sel1" } }, [_vm._v("年月:")]),
+      _vm._v(" "),
+      _c("select", { staticClass: "form-control" }, [
+        _c("option", { attrs: { value: "" } }, [_vm._v("1月")]),
         _vm._v(" "),
-        _c("select", { staticClass: "form-control" }, [
-          _c("option", { attrs: { value: "" } }, [_vm._v("1月")]),
-          _vm._v(" "),
-          _c("option", { attrs: { value: "" } }, [_vm._v("2月")])
-        ]),
-        _vm._v(" "),
-        _c("label", { attrs: { for: "sel1" } }, [_vm._v("ユーザー:")]),
-        _vm._v(" "),
-        _c("select", { staticClass: "form-control", attrs: { name: "user" } }, [
-          _c("option", { attrs: { value: "" } }, [_vm._v("jinei")])
-        ])
+        _c("option", { attrs: { value: "" } }, [_vm._v("2月")])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "table" }, [
-        _c(
-          "table",
-          {
-            staticClass: "table table-striped",
-            attrs: { "border-collapse": "collapse" }
-          },
-          [
-            _c("thead", [
-              _c("tr", { staticClass: "active" }, [
-                _c("th", [_vm._v("Hallstaff")]),
-                _vm._v(" "),
-                _c("th", [_vm._v("曜日")]),
-                _vm._v(" "),
-                _c("th", [_vm._v("Hallstaff")])
-              ]),
-              _vm._v(" "),
-              _c("tr", [
-                _c("th", [_vm._v("7月")]),
-                _vm._v(" "),
-                _c("th", [_vm._v("日付")]),
-                _vm._v(" "),
-                _c("th", [_vm._v("7月")])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("tbody", [
-              _c("tr", [
-                _c("td", [_vm._v("名前")]),
-                _vm._v(" "),
-                _c(
-                  "td",
-                  {
-                    attrs: {
-                      "data-toggle": "modal",
-                      "data-target": "#addModal"
-                    }
-                  },
-                  [
-                    _vm._v("\n            17:00\n            "),
-                    _c("br"),
-                    _vm._v("22:00\n          ")
-                  ]
-                ),
-                _vm._v(" "),
-                _c("td", [_vm._v("名前")])
-              ])
-            ])
-          ]
-        )
+      _c("label", { attrs: { for: "sel1" } }, [_vm._v("ユーザー:")]),
+      _vm._v(" "),
+      _c("select", { staticClass: "form-control", attrs: { name: "user" } }, [
+        _c("option", { attrs: { value: "" } }, [_vm._v("jinei")])
       ])
     ])
   }
