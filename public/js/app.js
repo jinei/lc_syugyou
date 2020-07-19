@@ -2320,6 +2320,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2329,7 +2330,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     this.getDate(0);
-    this.getUser();
+    this.getUser(0);
   },
   methods: {
     getDate: function getDate(flag) {
@@ -2339,15 +2340,23 @@ __webpack_require__.r(__webpack_exports__);
         flag: flag,
         now: this.dates[0]
       }).then(function (response) {
-        return _this.dates = response.data.date, console.log(response.data.test);
+        return _this.dates = response.data.date;
       });
     },
-    getUser: function getUser() {
+    getUser: function getUser(flag) {
       var _this2 = this;
 
-      axios.get("/users_get").then(function (response) {
-        return _this2.users = response.data;
-      });
+      if (flag == 0) {
+        axios.get("/users_get").then(function (response) {
+          return _this2.users = response.data;
+        });
+      } else {
+        axios.post("/users_show", {
+          id: flag
+        }).then(function (response) {
+          return _this2.users = response.data, console.log(_this2.users);
+        });
+      }
     }
   }
 });
@@ -38275,11 +38284,13 @@ var render = function() {
       _vm._v(" "),
       _c("tbody", [
         _c("tr", [
-          _c("th", { attrs: { scope: "row" } }, [_vm._v(_vm._s(_vm.users.id))]),
+          _c("th", { attrs: { scope: "row" } }, [
+            _vm._v(_vm._s(_vm.users[0].id))
+          ]),
           _vm._v(" "),
-          _c("th", [_vm._v(_vm._s(_vm.users.name))]),
+          _c("th", [_vm._v(_vm._s(_vm.users[0].name))]),
           _vm._v(" "),
-          _c("th", [_vm._v(_vm._s(_vm.users.email))])
+          _c("th", [_vm._v(_vm._s(_vm.users[0].email))])
         ])
       ])
     ])
@@ -38484,7 +38495,18 @@ var render = function() {
         ]
       ),
       _vm._v(" "),
-      _vm._m(0)
+      _c(
+        "select",
+        { staticClass: "form-control", attrs: { name: "user" } },
+        [
+          _c("option", { attrs: { value: "" } }, [_vm._v("全て")]),
+          _vm._v(" "),
+          _vm._l(_vm.users, function(user) {
+            return _c("option", { key: user.id }, [_vm._v(_vm._s(user.name))])
+          })
+        ],
+        2
+      )
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "table" }, [
@@ -38555,18 +38577,7 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "select",
-      { staticClass: "form-control", attrs: { name: "user" } },
-      [_c("option", { attrs: { value: "" } }, [_vm._v("jinei")])]
-    )
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

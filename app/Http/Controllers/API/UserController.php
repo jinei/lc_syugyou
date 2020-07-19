@@ -58,7 +58,7 @@ class UserController extends Controller
      */
     public function show(Request $request)
     {
-        $users = User::find($request->id);
+        $users = User::where('id',$request->id)->get();
 	    return $users;	
     }
 

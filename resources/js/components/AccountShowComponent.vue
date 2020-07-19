@@ -10,9 +10,9 @@
       </thead>
       <tbody>
         <tr>
-          <th scope="row">{{ users.id }}</th>
-          <th>{{ users.name }}</th>
-          <th>{{ users.email }}</th>
+          <th scope="row">{{ users[0].id }}</th>
+          <th>{{ users[0].name }}</th>
+          <th>{{ users[0].email }}</th>
         </tr>
       </tbody>
     </table>

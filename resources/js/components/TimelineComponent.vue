@@ -9,7 +9,8 @@
       </div>
       <!-- ユーザー選択 -->
       <select class="form-control" name="user">
-        <option value>jinei</option>
+        <option value>全て</option>
+        <option v-for="user in users" :key="user.id">{{ user.name }}</option>
       </select>
     </div>
 
@@ -58,7 +59,7 @@ export default {
   },
   mounted() {
     this.getDate(0);
-    this.getUser();
+    this.getUser(0);
   },
   methods: {
     getDate: function(flag) {
@@ -67,14 +68,20 @@ export default {
           flag: flag,
           now: this.dates[0]
         })
-        .then(
-          response => (
-            (this.dates = response.data.date), console.log(response.data.test)
-          )
-        );
+        .then(response => (this.dates = response.data.date));
     },
-    getUser: function() {
-      axios.get("/users_get").then(response => (this.users = response.data));
+    getUser: function(flag) {
+      if (flag == 0) {
+        axios.get("/users_get").then(response => (this.users = response.data));
+      } else {
+        axios
+          .post("/users_show", {
+            id: flag
+          })
+          .then(
+            response => ((this.users = response.data), console.log(this.users))
+          );
+      }
     }
   }
 };
